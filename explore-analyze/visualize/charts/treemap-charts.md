@@ -39,6 +39,9 @@ Consider using [bar charts](bar-charts.md) instead when:
 
 ## Build a treemap chart
 
+:::{include} ../../_snippets/lens-prerequisites.md
+:::
+
 To build a treemap chart:
 
 ::::::{stepper}
@@ -62,6 +65,8 @@ Using the **Visualization type** dropdown, select **Treemap**.
 
 Optionally:
    - Add additional **Group by** dimensions to create nested hierarchical levels.
+
+The chart preview updates to show rectangles sized by your metric. If you added multiple **Group by** dimensions, smaller rectangles appear nested inside the top-level categories.
 :::::
 
 :::::{step} Customize the chart to follow best practices
@@ -141,15 +146,18 @@ The **Group by** dimension defines how rectangles are grouped. You can add up to
 :   The **Group by** dimension supports the following functions:
 
     - **Top values**: Create rectangles for the most common values in a field.
+      - **Field**: Select the field to group by. You can add up to 4 fields to create multi-term groups. When multiple fields are selected, each group represents a unique combination of values across those fields. You can reorder the fields by dragging them to change their priority.
       - **Number of values**: How many top values to display.
       :::{include} ../../_snippets/lens-rank-by-options.md
       :::
       :::{include} ../../_snippets/lens-breakdown-advanced-settings.md
       :::
     - **Date histogram**: Group data into time-based buckets.
+      - **Field**: Select the date field to use for the time-based grouping.
       :::{include} ../../_snippets/lens-histogram-settings.md
       :::
     - **Intervals**: Create numeric ranges for continuous data.
+      - **Field**: Select the numeric field to create intervals from.
       - **Include empty rows**: Include intervals with no matching documents.
     - **Filters**: Define custom KQL filters to create specific groups.
 
@@ -196,9 +204,6 @@ When creating or editing a visualization, you can customize several appearance o
     - **Auto**: Show the legend when there are multiple groups (default).
     - **Show**: Always show the legend.
     - **Hide**: Never show the legend.
-
-**Position**
-:   Set the legend position: **Top**, **Left**, **Right**, or **Bottom**.
 
 **Nested**
 :   When using multiple **Group by** dimensions, enable this option to show the legend in a hierarchical format.

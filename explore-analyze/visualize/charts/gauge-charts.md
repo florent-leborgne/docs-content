@@ -38,6 +38,9 @@ Consider using [bar charts](bar-charts.md) instead when:
 
 ## Build a gauge chart
 
+:::{include} ../../_snippets/lens-prerequisites.md
+:::
+
 To build a gauge chart:
 
 ::::::{stepper}
@@ -59,7 +62,7 @@ Using the **Visualization type** dropdown, select **Gauge**.
 2. Configure the [**Metric**](#metric-settings) dimension to define the value displayed on the gauge.
 3. Optionally, configure the [**Maximum**](#maximum-settings) dimension to set a dynamic upper bound based on your data.
 
-The gauge automatically displays the metric value within the defined range.
+The chart preview updates to show a gauge with your metric value positioned within the range. If the gauge appears empty, verify that the selected field contains numeric data for the current time range.
 :::::
 
 :::::{step} Customize the chart to follow best practices

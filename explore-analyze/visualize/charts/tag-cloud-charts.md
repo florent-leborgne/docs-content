@@ -40,6 +40,9 @@ Consider using [tables](tables.md) instead when:
 
 ## Build a tag cloud chart
 
+:::{include} ../../_snippets/lens-prerequisites.md
+:::
+
 To build a tag cloud chart:
 
 ::::::{stepper}
@@ -61,6 +64,7 @@ Using the **Visualization type** dropdown, select **Tag cloud**.
 2. Configure the [**Tags**](#tags-settings) dimension to define which field provides the text labels.
 3. Configure the [**Metric**](#metric-settings) dimension to define the value that determines each tag's size.
 
+The chart preview updates to show text labels sized by metric value, with more prominent tags representing higher values.
 :::::
 
 :::::{step} Customize the chart to follow best practices
@@ -136,6 +140,7 @@ The **Tags** dimension defines the text labels that appear in the cloud.
 :   The **Tags** dimension supports the following functions:
 
     - **Top values**: Display the most common values in a field.
+      - **Field**: Select the field to group by. You can add up to 4 fields to create multi-term tags. When multiple fields are selected, each tag represents a unique combination of values across those fields. You can reorder the fields by dragging them to change their priority.
       - **Number of values**: How many tags to display (recommended: 20-50).
       :::{include} ../../_snippets/lens-rank-by-options.md
       :::

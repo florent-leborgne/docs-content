@@ -38,6 +38,9 @@ Consider using [heat maps](heat-map-charts.md) instead when:
 
 ## Build a region map chart
 
+:::{include} ../../_snippets/lens-prerequisites.md
+:::
+
 To build a region map chart:
 
 ::::::{stepper}
@@ -59,6 +62,7 @@ Using the **Visualization type** dropdown, select **Region map**.
 2. Configure the [**Region**](#region-settings) dimension to define which geographic field to use. This field should contain region codes (ISO country codes, state abbreviations, and more) that can be matched to map boundaries.
 3. Configure the [**Metric**](#metric-settings) dimension to define the value displayed for each region. This determines the color intensity.
 
+The chart preview updates to show a map with regions colored by metric value. If regions appear gray, verify that the field values match the expected geographic codes (such as ISO country codes).
 :::::
 
 :::::{step} Customize the chart to follow best practices
@@ -139,6 +143,7 @@ The **Region** dimension defines which geographic areas to display on the map.
 :   The **Region** dimension supports the following functions:
 
     - **Top values**: Display the regions with the highest metric values.
+      - **Field**: Select the field to group by. You can add up to 4 fields to create multi-term groupings. When multiple fields are selected, each region represents a unique combination of values across those fields. You can reorder the fields by dragging them to change their priority.
       - **Number of values**: How many regions to display.
       :::{include} ../../_snippets/lens-rank-by-options.md
       :::

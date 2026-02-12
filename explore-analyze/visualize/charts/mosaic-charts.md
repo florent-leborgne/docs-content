@@ -39,6 +39,9 @@ Consider using [bar charts](bar-charts.md) instead when:
 
 ## Build a mosaic chart
 
+:::{include} ../../_snippets/lens-prerequisites.md
+:::
+
 To build a mosaic chart:
 
 ::::::{stepper}
@@ -61,6 +64,7 @@ Using the **Visualization type** dropdown, select **Mosaic**.
 3. Configure the [**Vertical axis**](#vertical-axis-settings) dimension to define the rows within each column. The height of each rectangle represents the proportion within that column.
 4. The **Metric** is automatically set to **Count**. This determines the size of each rectangle.
 
+The chart preview updates to show a grid of rectangles. Column widths represent the proportion of each horizontal category, and rectangle heights within each column show the distribution of vertical categories.
 :::::
 
 :::::{step} Customize the chart to follow best practices
@@ -139,6 +143,7 @@ The **Horizontal axis** dimension defines the columns of the mosaic. Column widt
 :   The **Horizontal axis** dimension supports the following functions:
 
     - **Top values**: Create columns for the most common values in a field.
+      - **Field**: Select the field to group by. You can add up to 4 fields to create multi-term columns. When multiple fields are selected, each column represents a unique combination of values across those fields. You can reorder the fields by dragging them to change their priority.
       - **Number of values**: How many categories to display.
       :::{include} ../../_snippets/lens-rank-by-options.md
       :::
@@ -157,6 +162,7 @@ The **Vertical axis** dimension defines the rows within each column. Rectangle h
 :   The **Vertical axis** dimension supports the following functions:
 
     - **Top values**: Create rows for the most common values in a field.
+      - **Field**: Select the field to group by. You can add up to 4 fields to create multi-term rows. When multiple fields are selected, each row represents a unique combination of values across those fields. You can reorder the fields by dragging them to change their priority.
       - **Number of values**: How many categories to display.
       :::{include} ../../_snippets/lens-rank-by-options.md
       :::
@@ -202,9 +208,6 @@ When creating or editing a visualization, you can customize several appearance o
     - **Auto**: Show the legend when there are multiple categories (default).
     - **Show**: Always show the legend.
     - **Hide**: Never show the legend.
-
-**Position**
-:   Set the legend position: **Top**, **Left**, **Right**, or **Bottom**.
 
 **Label truncation**
 :   Choose whether to truncate long legend labels, and set a limit for how many lines to display.

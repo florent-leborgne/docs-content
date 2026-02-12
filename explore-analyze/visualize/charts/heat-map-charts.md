@@ -38,6 +38,9 @@ Consider using [line charts](line-charts.md) instead when:
 
 ## Build a heat map chart
 
+:::{include} ../../_snippets/lens-prerequisites.md
+:::
+
 To build a heat map chart:
 
 ::::::{stepper}
@@ -62,6 +65,8 @@ Using the **Visualization type** dropdown, select **Heat map**.
 
 Optionally:
    - Add a **Breakdown** dimension to split the heat map into multiple charts.
+
+The chart preview updates to show a grid of colored cells. Cell colors represent the magnitude of the metric value. If the grid appears empty, verify that both axes have data for the current time range.
 :::::
 
 :::::{step} Customize the chart to follow best practices
@@ -145,15 +150,18 @@ The **Horizontal axis** dimension defines the columns of the heat map.
 :   The **Horizontal axis** dimension supports the following functions:
 
     - **Top values**: Create columns for the most common values in a field.
+      - **Field**: Select the field to group by. You can add up to 4 fields to create multi-term columns. When multiple fields are selected, each column represents a unique combination of values across those fields. You can reorder the fields by dragging them to change their priority.
       - **Number of values**: How many top values to display.
       :::{include} ../../_snippets/lens-rank-by-options.md
       :::
       :::{include} ../../_snippets/lens-breakdown-advanced-settings.md
       :::
     - **Date histogram**: Group data into time-based buckets.
+      - **Field**: Select the date field to use for the time-based grouping.
       :::{include} ../../_snippets/lens-histogram-settings.md
       :::
     - **Intervals**: Create numeric ranges for continuous data.
+      - **Field**: Select the numeric field to create intervals from.
       - **Include empty rows**: Include intervals with no matching documents.
 
 **Appearance**
@@ -167,15 +175,18 @@ The **Vertical axis** dimension defines the rows of the heat map.
 :   The **Vertical axis** dimension supports the same functions as the horizontal axis:
 
     - **Top values**: Create rows for the most common values in a field.
+      - **Field**: Select the field to group by. You can add up to 4 fields to create multi-term rows. When multiple fields are selected, each row represents a unique combination of values across those fields. You can reorder the fields by dragging them to change their priority.
       - **Number of values**: How many top values to display.
       :::{include} ../../_snippets/lens-rank-by-options.md
       :::
       :::{include} ../../_snippets/lens-breakdown-advanced-settings.md
       :::
     - **Date histogram**: Group data into time-based buckets.
+      - **Field**: Select the date field to use for the time-based grouping.
       :::{include} ../../_snippets/lens-histogram-settings.md
       :::
     - **Intervals**: Create numeric ranges for continuous data.
+      - **Field**: Select the numeric field to create intervals from.
       - **Include empty rows**: Include intervals with no matching documents.
 
 **Appearance**

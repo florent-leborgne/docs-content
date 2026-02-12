@@ -39,6 +39,9 @@ Consider using [bar charts](bar-charts.md) instead when:
 
 ## Build a waffle chart
 
+:::{include} ../../_snippets/lens-prerequisites.md
+:::
+
 To build a waffle chart:
 
 ::::::{stepper}
@@ -62,6 +65,8 @@ Using the **Visualization type** dropdown, select **Waffle**.
 
 Optionally:
    - Enable [**Multiple metrics**](#multiple-metrics) in the layer settings to define each category as a separate metric.
+
+The chart preview updates to show a grid of colored squares. Each color represents a category, and the number of squares reflects its proportion of the total.
 :::::
 
 :::::{step} Customize the chart to follow best practices
@@ -146,15 +151,18 @@ The **Group by** dimension defines how the waffle is divided into colored sectio
 :   The **Group by** dimension supports the following functions:
 
     - **Top values**: Create sections for the most common values in a field.
+      - **Field**: Select the field to group by. You can add up to 4 fields to create multi-term sections. When multiple fields are selected, each section represents a unique combination of values across those fields. You can reorder the fields by dragging them to change their priority.
       - **Number of values**: How many top values to display.
       :::{include} ../../_snippets/lens-rank-by-options.md
       :::
       :::{include} ../../_snippets/lens-breakdown-advanced-settings.md
       :::
     - **Date histogram**: Group data into time-based buckets.
+      - **Field**: Select the date field to use for the time-based grouping.
       :::{include} ../../_snippets/lens-histogram-settings.md
       :::
     - **Intervals**: Create numeric ranges for continuous data.
+      - **Field**: Select the numeric field to create intervals from.
       - **Include empty rows**: Include intervals with no matching documents.
     - **Filters**: Define custom KQL filters to create specific sections.
 
@@ -211,9 +219,6 @@ When creating or editing a visualization, you can customize several appearance o
     - **Auto**: Show the legend when there are multiple categories (default).
     - **Show**: Always show the legend.
     - **Hide**: Never show the legend.
-
-**Position**
-:   Set the legend position: **Top**, **Left**, **Right**, or **Bottom**.
 
 **Statistics**
 :   Show the **Value** statistic in the legend to display the numeric value alongside each legend entry.

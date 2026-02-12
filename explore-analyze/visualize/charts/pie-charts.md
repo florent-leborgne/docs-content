@@ -59,6 +59,8 @@ Using the **Visualization type** dropdown, select **Pie**.
 Optionally:
    - Add additional **Slice by** dimensions to create nested slices (a multi-level or sunburst-style chart).
    - Enable [**Multiple metrics**](#multiple-metrics) in the layer settings to compare different measures within the same chart.
+
+The chart preview updates to show a pie divided into slices. Each slice represents a category value, and its size reflects the metric proportion. If you added multiple **Slice by** dimensions, inner and outer rings appear to show the hierarchy.
 :::::
 
 :::::{step} Customize the chart to follow best practices
