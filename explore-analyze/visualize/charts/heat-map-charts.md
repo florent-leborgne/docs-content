@@ -8,33 +8,13 @@ description: Instructions and best practices for building heat map charts with K
 
 # Build heat map charts with {{kib}}
 
-Heat map charts display data as a grid of colored cells, where each cell's color represents the magnitude of a value. They are ideal for visualizing patterns across two dimensions, identifying correlations, and spotting anomalies in large datasets.
+Heat map charts display data as a grid of colored cells, where each cell's color represents the magnitude of a value. They are ideal for visualizing patterns across two categorical or temporal dimensions, identifying correlations, and spotting anomalies in large datasets.
 
 You can create heat map charts in {{kib}} using [**Lens**](../lens.md).
 
 <!-- TODO: Add screenshot
 ![Example Lens heat map chart showing request counts by hour and day](/explore-analyze/images/heat-map-chart-example.png)
 -->
-
-## When to use heat map charts
-
-Heat map charts work best when:
-
-* You need to visualize data across **two categorical or temporal dimensions**
-* You want to identify **patterns, trends, or anomalies** in your data
-* You have a **large dataset** with many data points
-* You need to compare **intensity or frequency** across categories
-
-Consider using [bar charts](bar-charts.md) instead when:
-
-* You only have **one dimension** to visualize
-* You need precise **value comparisons**
-* You have a **small number of data points**
-
-Consider using [line charts](line-charts.md) instead when:
-
-* You want to show **trends over time** for a single metric
-* You need to compare **multiple series** directly
 
 ## Build a heat map chart
 

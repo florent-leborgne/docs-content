@@ -16,27 +16,6 @@ You can create treemap charts in {{kib}} using [**Lens**](../lens.md).
 ![Example Lens treemap chart showing product sales by category](/explore-analyze/images/treemap-chart-example.png)
 -->
 
-## When to use treemap charts
-
-Treemap charts work best when:
-
-* You have **hierarchical data** with multiple levels of categories
-* You want to show **part-to-whole relationships** within a hierarchy
-* You need to compare **relative sizes** of many categories at once
-* You want to visualize **nested categorization** (for example, region > country > city)
-
-Consider using [pie charts](pie-charts.md) instead when:
-
-* You have a **single level** of categories (no hierarchy)
-* You have **fewer than 6 categories**
-* Precise percentage comparison is important
-
-Consider using [bar charts](bar-charts.md) instead when:
-
-* You need **precise value comparisons**
-* Your categories don't have a natural hierarchy
-* You want to show **trends over time**
-
 ## Build a treemap chart
 
 :::{include} ../../_snippets/lens-prerequisites.md

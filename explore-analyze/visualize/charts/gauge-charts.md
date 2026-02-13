@@ -8,33 +8,13 @@ description: Instructions and best practices for building gauge charts with Kiba
 
 # Build gauge charts with {{kib}}
 
-Gauge charts display a single value within a defined range, showing how close the value is to a target or threshold. They are ideal for monitoring KPIs, tracking progress toward goals, and highlighting when values fall within acceptable, warning, or critical ranges.
+Gauge charts display a single value within a defined range, showing how close the value is to a target or threshold. They are ideal for monitoring KPIs, tracking progress toward goals, and highlighting when values fall within acceptable, warning, or critical ranges. Unlike [metric charts](metric-charts.md) that display raw values, gauge charts add range context with known minimum and maximum boundaries.
 
 You can create gauge charts in {{kib}} using [**Lens**](../lens.md).
 
 <!-- TODO: Add screenshot
 ![Example Lens gauge chart showing CPU usage at 73%](/explore-analyze/images/gauge-chart-example.png)
 -->
-
-## When to use gauge charts
-
-Gauge charts work best when:
-
-* You need to display a **single metric** against a defined range
-* You want to show **progress toward a goal** or target
-* You need to highlight **threshold levels** (good, warning, critical)
-* The value has a **known minimum and maximum**
-
-Consider using [metric charts](metric-charts.md) instead when:
-
-* You want to display the **raw value** without a range context
-* You need to compare **multiple metrics** side by side
-* The metric doesn't have meaningful min/max boundaries
-
-Consider using [bar charts](bar-charts.md) instead when:
-
-* You need to compare values across **multiple categories**
-* You want to show **trends over time**
 
 ## Build a gauge chart
 

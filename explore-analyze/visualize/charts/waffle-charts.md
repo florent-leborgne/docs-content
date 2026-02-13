@@ -8,34 +8,13 @@ description: Instructions and best practices for building waffle charts with Kib
 
 # Build waffle charts with {{kib}}
 
-Waffle charts display data as a grid of small squares, where each square represents a portion of the whole. They are ideal for showing percentages, visualizing survey results, and making proportions intuitive by representing data as discrete units.
+Waffle charts display data as a grid of small squares, where each square represents a portion of the whole. They are ideal for showing percentages, visualizing survey results, and making proportions intuitive by representing data as discrete units. They work best with fewer than 10 categories.
 
 You can create waffle charts in {{kib}} using [**Lens**](../lens.md).
 
 <!-- TODO: Add screenshot
 ![Example Lens waffle chart showing browser market share](/explore-analyze/images/waffle-chart-example.png)
 -->
-
-## When to use waffle charts
-
-Waffle charts work best when:
-
-* You want to show **percentages** or **proportions** in an intuitive way
-* Each category represents a **meaningful unit** that can be counted
-* You have **fewer than 10 categories** to display
-* You want to emphasize that values are **parts of a whole**
-
-Consider using [pie charts](pie-charts.md) instead when:
-
-* You want a more **compact** visualization
-* You need to show **nested hierarchies** (donut or sunburst style)
-* The exact proportions are less important than the overall distribution
-
-Consider using [bar charts](bar-charts.md) instead when:
-
-* You need to compare **exact values** across categories
-* You have **many categories** to display
-* Showing the part-to-whole relationship is less important
 
 ## Build a waffle chart
 

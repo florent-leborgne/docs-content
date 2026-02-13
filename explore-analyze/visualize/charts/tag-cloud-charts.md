@@ -8,35 +8,13 @@ description: Instructions and best practices for building tag cloud charts with 
 
 # Build tag cloud charts with {{kib}}
 
-Tag cloud charts display text labels (tags) where each tag's size represents its frequency or importance. They are ideal for visualizing word frequency, showing popular categories, and providing an at-a-glance summary of text-based data.
+Tag cloud charts display text labels (tags) where each tag's size represents its frequency or importance. They are ideal for visualizing word frequency, showing popular categories, and providing an at-a-glance summary of text-based data. They work best when the relative prominence of terms matters more than exact values, and are most effective with up to about 50 items.
 
 You can create tag cloud charts in {{kib}} using [**Lens**](../lens.md).
 
 <!-- TODO: Add screenshot
 ![Example Lens tag cloud chart showing popular search terms](/explore-analyze/images/tag-cloud-chart-example.png)
 -->
-
-## When to use tag cloud charts
-
-Tag cloud charts work best when:
-
-* You want to show **relative frequency** of terms or categories
-* You need a quick **visual summary** of text-based data
-* You're displaying **popular items**, such as tags, keywords, or categories
-* The exact values are less important than the **relative prominence**
-
-Consider using [bar charts](bar-charts.md) instead when:
-
-* You need **precise value comparisons**
-* You have **more than 50 items** to display
-* You need to show **trends over time**
-* The **order** of items matters
-
-Consider using [tables](tables.md) instead when:
-
-* You need to show **exact counts** alongside terms
-* You want to **sort or filter** the data interactively
-* You have **many columns** of information to display
 
 ## Build a tag cloud chart
 

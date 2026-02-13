@@ -8,27 +8,11 @@ description: Instructions and best practices for building pie and donut charts w
 
 # Build pie charts with {{kib}}
 
-Pie charts display parts of a whole as slices, where each slice represents a value and its size represents its prevalence. Pie charts are ideal for illustrating the relative prevalence of categorical data, and for displaying percentage or proportional data.
+Pie charts display parts of a whole as slices, where each slice represents a value and its size represents its prevalence. Pie charts are ideal for illustrating the relative prevalence of categorical data, and for displaying percentage or proportional data. They work best with a **maximum of 6 slices** and when proportions are around 25%, 50%, or 75%, as these are easiest to perceive accurately. For more than 6 categories, precise comparisons, or negative values, consider using [bar charts](bar-charts.md) instead.
 
 You can create pie charts in {{kib}} using [**Lens**](../lens.md).
 
 ![Example Lens pie chart](../../images/kibana-lens-pie-chart.png)
-
-## When to use pie charts
-
-Pie charts work best when:
-
-* You have a **maximum of 6 slices**. More slices make the chart difficult to read.
-* Values are around **25%, 50%, or 75%**. These proportions are easy to perceive accurately.
-* One category is **significantly larger** than the others.
-* You want to show **part-to-whole relationships** at a glance.
-
-Consider using [bar charts](bar-charts.md) instead when:
-
-* You need to **compare** the exact size of slices.
-* You have **more than 6 categories**.
-* You need to compare **multiple data sets**. Use part-to-whole bar charts with percentages instead.
-* Your data includes **negative values**.
 
 ## Build a pie chart
 

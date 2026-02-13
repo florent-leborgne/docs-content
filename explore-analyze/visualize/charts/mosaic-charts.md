@@ -8,34 +8,13 @@ description: Instructions and best practices for building mosaic charts with Kib
 
 # Build mosaic charts with {{kib}}
 
-Mosaic charts display the relationship between two categorical variables as a grid of rectangles, where both the width and height of each rectangle represent proportions of the data. They are ideal for visualizing how categories combine, showing conditional distributions, and exploring relationships between two dimensions.
+Mosaic charts display the relationship between two categorical variables as a grid of rectangles, where both the width and height of each rectangle represent proportions of the data. They are ideal for visualizing how categories combine, showing conditional distributions, and exploring relationships between two dimensions. They work best with a moderate number of categories in each dimension (2-8 each).
 
 You can create mosaic charts in {{kib}} using [**Lens**](../lens.md).
 
 <!-- TODO: Add screenshot
 ![Example Lens mosaic chart showing order status by product category](/explore-analyze/images/mosaic-chart-example.png)
 -->
-
-## When to use mosaic charts
-
-Mosaic charts work best when:
-
-* You want to show the **relationship** between two categorical variables
-* You need to visualize **conditional distributions** (how one variable varies within another)
-* You're exploring **associations** between categories
-* You have a **moderate number of categories** in each dimension (2-8 categories each)
-
-Consider using [heat maps](heat-map-charts.md) instead when:
-
-* You have **many categories** in each dimension
-* Your cell values are **continuous metrics** rather than counts
-* You want to emphasize **magnitude** rather than proportions
-
-Consider using [bar charts](bar-charts.md) instead when:
-
-* You need **precise value comparisons**
-* You only have **one categorical dimension**
-* You want to show **trends over time**
 
 ## Build a mosaic chart
 

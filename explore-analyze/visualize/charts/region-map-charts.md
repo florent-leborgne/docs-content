@@ -16,26 +16,6 @@ You can create region map charts in {{kib}} using [**Lens**](../lens.md).
 ![Example Lens region map chart showing sales by country](/explore-analyze/images/region-map-chart-example.png)
 -->
 
-## When to use region map charts
-
-Region map charts work best when:
-
-* Your data has a **geographic dimension** (country, state, region)
-* You want to show **geographic patterns** or distributions
-* You need to compare **values across regions** at a glance
-* The geographic context adds meaning to your analysis
-
-Consider using [bar charts](bar-charts.md) instead when:
-
-* You need **precise value comparisons** between regions
-* Geographic context is less important than the data values
-* You have **many regions** that would clutter a map
-
-Consider using [heat maps](heat-map-charts.md) instead when:
-
-* You're comparing **two non-geographic dimensions**
-* You want to show **correlations** between variables
-
 ## Build a region map chart
 
 :::{include} ../../_snippets/lens-prerequisites.md
