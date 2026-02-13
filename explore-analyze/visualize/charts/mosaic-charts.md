@@ -71,53 +71,6 @@ Refer to [Mosaic chart settings](#mosaic-chart-settings) to find all configurati
 
 ::::::
 
-## Advanced mosaic chart scenarios
-
-### Explore category associations [category-associations]
-
-Use mosaic charts to discover how categories from two different fields are associated.
-
-#### Example: Browser usage by operating system
-
-This example uses the [sample web logs data](/manage-data/ingest/sample-data.md) to visualize the relationship between browsers and operating systems.
-
-1. Create a **Mosaic** chart using the **{{kib}} Sample Data Logs** {{data-source}}.
-2. For the **Horizontal axis**, select `machine.os.keyword` with **Top values** (top 5).
-3. For the **Vertical axis**, select `geo.src` with **Top values** (top 5 countries).
-
-The resulting mosaic shows:
-- Column widths representing the proportion of each operating system
-- Rectangle heights within each column showing the distribution of countries for that OS
-
-<!-- TODO: Add screenshot
-![Mosaic chart showing OS usage by country](/explore-analyze/images/mosaic-scenario-category-associations.png "=70%")
--->
-
-### Compare distributions across segments [segment-comparison]
-
-Mosaic charts reveal whether distributions differ across segments.
-
-#### Example: Product categories by customer gender
-
-1. Create a **Mosaic** chart using the **{{kib}} Sample Data eCommerce** {{data-source}}.
-2. For the **Horizontal axis**, select `customer_gender` with **Top values**.
-3. For the **Vertical axis**, select `category.keyword` with **Top values** (top 6).
-
-If the rectangle heights are similar across columns, the distribution is independent. If heights vary significantly, there's an association between gender and category preference.
-
-<!-- TODO: Add screenshot
-![Mosaic chart showing product categories by customer gender](/explore-analyze/images/mosaic-scenario-segment-comparison.png "=70%")
--->
-
-### Group smaller categories [other-category]
-
-When some categories are too small to display meaningfully, group them into an "Other" category.
-
-1. In the dimension configuration, select the field.
-2. Use **Top values** to limit the number of categories displayed.
-3. Expand **Advanced**.
-4. Enable **Group other values as "Other"** to combine remaining values.
-
 ## Mosaic chart settings [mosaic-chart-settings]
 
 Customize your mosaic chart to display exactly the information you need, formatted the way you want.

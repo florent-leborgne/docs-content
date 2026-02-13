@@ -73,51 +73,6 @@ Refer to [Treemap chart settings](#treemap-chart-settings) to find all configura
 
 ::::::
 
-## Advanced treemap chart scenarios
-
-### Create a multi-level hierarchy [multi-level]
-
-Treemaps excel at showing nested categorization across multiple levels.
-
-#### Example: Sales by category and product
-
-This example uses the [sample ecommerce data](/manage-data/ingest/sample-data.md) to visualize sales hierarchically.
-
-1. Create a **Treemap** chart using the **{{kib}} Sample Data eCommerce** {{data-source}}.
-2. Add a **Group by** dimension for `category.keyword` with **Top values** (top 6).
-3. Add a second **Group by** dimension for `products.product_name.keyword` with **Top values** (top 5).
-4. Set the **Metric** to `Sum(taxful_total_price)`.
-
-The resulting treemap shows product categories as large rectangles, with individual products nested within each category.
-
-<!-- TODO: Add screenshot
-![Treemap showing sales by category and product](/explore-analyze/images/treemap-scenario-multi-level.png "=70%")
--->
-
-### Group small values into "Other" [other-category]
-
-When you have many small categories, group them to keep the visualization readable.
-
-1. In the **Group by** configuration, select the field.
-2. Use **Top values** to limit the number of rectangles displayed.
-3. Expand **Advanced**.
-4. Enable **Group other values as "Other"** to combine remaining values into a single rectangle.
-
-:::{tip}
-Be careful when using "Other" as it could end up being the largest category. If "Other" dominates, consider increasing the number of top values or using a different visualization.
-:::
-
-### Compare proportions across time [time-comparison]
-
-Create treemaps using date-based grouping to compare how proportions change over time.
-
-1. Create a **Treemap** chart.
-2. Add a **Group by** dimension using a date field with **Date histogram**.
-3. Set the interval to match your comparison needs (daily, weekly, monthly).
-4. Add a second **Group by** dimension for the category you want to compare.
-
-This creates a treemap where the top-level rectangles represent time periods and the nested rectangles show the category distribution within each period.
-
 ## Treemap chart settings [treemap-chart-settings]
 
 Customize your treemap chart to display exactly the information you need, formatted the way you want.

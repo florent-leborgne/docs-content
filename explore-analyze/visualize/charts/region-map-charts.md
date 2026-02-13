@@ -70,51 +70,6 @@ Refer to [Region map chart settings](#region-map-chart-settings) to find all con
 
 ::::::
 
-## Advanced region map chart scenarios
-
-### Visualize global traffic distribution [global-traffic]
-
-Show how website visitors or requests are distributed across countries.
-
-#### Example: Website visitors by country
-
-This example uses the [sample web logs data](/manage-data/ingest/sample-data.md) to visualize visitor geography.
-
-1. Create a **Region map** chart using the **{{kib}} Sample Data Logs** {{data-source}}.
-2. For the **Region** dimension, select `geo.src` (source country).
-3. For the **Metric**, select **Count** to show the number of requests from each country.
-4. Select {icon}`brush` **Style** and choose a sequential color palette (for example, blues).
-
-The resulting map shows countries colored by traffic volume, with darker colors indicating more visitors.
-
-<!-- TODO: Add screenshot
-![Region map showing website traffic by country](/explore-analyze/images/region-map-scenario-global-traffic.png "=70%")
--->
-
-### Compare sales performance by region [sales-by-region]
-
-Use region maps to visualize sales or revenue distribution across geographic areas.
-
-#### Example: Revenue by country
-
-1. Create a **Region map** chart using your sales {{data-source}}.
-2. For the **Region** dimension, select your country field.
-3. For the **Metric**, select `Sum(revenue)` or your equivalent sales field.
-4. Configure color ranges to highlight top-performing and underperforming regions.
-
-### Use different map layers [map-layers]
-
-Region maps support different geographic boundary sets. Choose the appropriate layer based on your data:
-
-* **World countries**: For global data using ISO country codes
-* **US states**: For United States data using state abbreviations
-* **Administrative regions**: For sub-country analysis where available
-
-To change the map layer:
-
-1. Select {icon}`brush` **Style**.
-2. In **Layer**, select the appropriate boundary set.
-
 ## Region map chart settings [region-map-chart-settings]
 
 Customize your region map chart to display exactly the information you need, formatted the way you want.

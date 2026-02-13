@@ -12,9 +12,7 @@ Heat map charts display data as a grid of colored cells, where each cell's color
 
 You can create heat map charts in {{kib}} using [**Lens**](../lens.md).
 
-<!-- TODO: Add screenshot
-![Example Lens heat map chart showing request counts by hour and day](/explore-analyze/images/heat-map-chart-example.png)
--->
+![Example Lens heat map chart representing temperatures in various cities](/explore-analyze/images/heat-map-chart-example.png)
 
 ## Build a heat map chart
 
@@ -58,7 +56,7 @@ Tweak the appearance of the chart to your needs. Consider the following best pra
 :   For data that ranges from low to high, use a sequential palette (light to dark). Reserve diverging palettes for data with a meaningful midpoint.
 
 **Consider data density**
-:   If cells are too small to read, reduce the number of buckets or use a smaller time interval on your axes.
+:   If cells are too small to read, reduce the number of buckets or use a larger time interval on your axes.
 
 **Order categories meaningfully**
 :   For categorical axes, order values logically (alphabetically, by frequency, or by a natural ordering like days of the week).
@@ -75,58 +73,17 @@ Refer to [Heat map chart settings](#heat-map-chart-settings) to find all configu
 
 ## Advanced heat map chart scenarios
 
-### Visualize activity patterns over time [time-patterns]
+### Highlight anomalies with custom color ranges [anomaly-colors]
 
-Heat maps are excellent for spotting temporal patterns, such as peak usage hours or seasonal trends.
-
-#### Example: Website traffic by hour and day
-
-This example uses the [sample web logs data](/manage-data/ingest/sample-data.md) to visualize when website traffic is highest.
-
-1. Create a **Heat map** chart using the **{{kib}} Sample Data Logs** {{data-source}}.
-2. For the **Horizontal axis**, select `@timestamp` with **Date histogram** and interval set to **Hour of day**.
-3. For the **Vertical axis**, select `@timestamp` with **Date histogram** and interval set to **Day of week**.
-4. For the **Cell value**, select **Count** to show the number of requests.
-5. Select the **Cell value** dimension and choose a sequential color palette.
-
-The resulting heat map shows traffic intensity across hours and days, making it easy to identify peak periods.
-
-<!-- TODO: Add screenshot
-![Heat map showing website traffic intensity by hour and day of week](/explore-analyze/images/heat-map-scenario-time-patterns.png "=70%")
--->
-
-### Compare categories with a heat map [category-comparison]
-
-Use heat maps to compare metrics across two categorical dimensions.
-
-#### Example: Response codes by geographic region
-
-1. Create a **Heat map** chart using your web logs {{data-source}}.
-2. For the **Horizontal axis**, select `geo.src` with **Top values** (top 10 countries).
-3. For the **Vertical axis**, select `response.keyword` with **Top values**.
-4. For the **Cell value**, select **Count** to show the number of requests.
-
-This heat map reveals which regions experience more errors or specific response patterns.
-
-<!-- TODO: Add screenshot
-![Heat map showing response codes by geographic region](/explore-analyze/images/heat-map-scenario-category-comparison.png "=70%")
--->
-
-### Highlight anomalies with color ranges [anomaly-colors]
-
-Configure color ranges to emphasize unusual values.
+You can configure custom color ranges on the **Cell value** dimension to emphasize unusual values, making outliers immediately visible.
 
 1. Create a **Heat map** chart with your dimensions configured.
 2. Select the **Cell value** dimension to open its settings.
-3. In the **Color palette** configuration, define custom color ranges that highlight normal versus anomalous values:
+3. In the **Color palette** configuration, select **Custom** to define your own color ranges:
    - Normal range: Neutral colors (blues, grays)
    - Anomalous range: Attention-grabbing colors (red, orange)
 
-This approach makes outliers immediately visible.
-
-<!-- TODO: Add screenshot
-![Heat map with custom color ranges highlighting anomalous values](/explore-analyze/images/heat-map-scenario-anomaly-colors.png "=70%")
--->
+![Example Lens heat map chart showing error rates per day for various errors](/explore-analyze/images/heat-map-chart-example-server-errors.png)
 
 ## Heat map chart settings [heat-map-chart-settings]
 
@@ -208,26 +165,26 @@ When creating or editing a visualization, you can customize several appearance o
 **Value labels**
 :   Control whether cell values are displayed as text inside each cell:
     - **Hide**: Do not display values in cells (default).
-    - **Show**: Display the metric value inside each cell.
+    - **Show, if able**: Display the metric value inside each cell when there is enough space. Cells that are too small to fit the text will not show a label.
 
 **Vertical axis**
 
 **Axis title**
 :   Show or hide the vertical axis title. When visible, you can enter a custom title or use the default field name.
 
-**Axis labels**
-:   Show or hide the labels on the vertical axis.
+**Tick labels**
+:   Toggle whether to show or hide the tick labels on the vertical axis.
 
 **Horizontal axis**
 
 **Axis title**
 :   Show or hide the horizontal axis title. When visible, you can enter a custom title or use the default field name.
 
-**Axis labels**
-:   Show or hide the labels on the horizontal axis.
+**Tick labels**
+:   Toggle whether to show or hide the tick labels on the horizontal axis.
 
 **Orientation**
-:   Control the orientation of horizontal axis labels:
+:   Control the orientation of horizontal axis tick labels. Only available when **Tick labels** is enabled.
     - **Horizontal**: Labels are displayed horizontally (default).
     - **Vertical**: Labels are rotated 90 degrees.
     - **Angled**: Labels are displayed at a 45-degree angle.
@@ -239,47 +196,26 @@ When creating or editing a visualization, you can customize several appearance o
     - **Show**: Display the legend (default).
     - **Hide**: Do not display the legend.
 
-**Position**
-:   Set the legend position: **Right** (default), **Left**, **Top**, or **Bottom**.
+**Width**
+:   Control the width of the legend panel. Options include **Small**, **Medium**, **Large**, and **Extra large**.
 
-**Max lines**
-:   Set the maximum number of lines for legend labels (1-5). Defaults to 1.
-
-**Truncate**
-:   Toggle whether to truncate long legend labels.
-
-**Legend size**
-:   Control the size of the legend panel: **Auto** (default), **Small**, **Medium**, **Large**, or **Extra large**.
+**Label truncation**
+:   Toggle whether to truncate long legend labels. When enabled, set the **Line limit** to control the maximum number of lines for each label (defaults to 1).
 
 ## Heat map chart examples
 
 The following examples show various configuration options for building impactful heat map charts.
 
-**Request volume by hour and day**
-:   Visualize when your website receives the most traffic:
+**Request volume by day and hour**
+:   Visualize when your website receives the most traffic using a runtime field that extracts the hour of the day (0-23) from `@timestamp`:
 
     * Example based on: {{kib}} Sample Data Logs
-    * **Horizontal axis**: `@timestamp` (Date histogram, hourly)
-    * **Vertical axis**: `@timestamp` (Date histogram, daily)
+    * **Horizontal axis**: `@timestamp` (Date histogram, daily)
+    * **Vertical axis**: `hour_of_day` (Top 24 values, "Aggregate by this dimension first" active, ranked by descending alphabetical order)
     * **Cell value**: Count
-    * **Color palette**: Blues (sequential)
+    * **Color palette**: Cool (sequential)
 
-<!-- TODO: Add screenshot
 ![Heat map showing request volume by hour and day](/explore-analyze/images/heat-map-example-request-volume.png "=70%")
--->
-
-**Error rates by endpoint and status code**
-:   Identify which endpoints have the most errors:
-
-    * Example based on: {{kib}} Sample Data Logs
-    * **Horizontal axis**: `request.keyword` (Top 10 values)
-    * **Vertical axis**: `response.keyword` (Top values)
-    * **Cell value**: Count
-    * **Color palette**: Reds (sequential, reversed for higher = darker)
-
-<!-- TODO: Add screenshot
-![Heat map showing error rates by endpoint and status code](/explore-analyze/images/heat-map-example-error-rates.png "=70%")
--->
 
 **Sales performance by product and region**
 :   Compare product sales across geographic regions:
@@ -288,8 +224,6 @@ The following examples show various configuration options for building impactful
     * **Horizontal axis**: `geoip.city_name` (Top 10 values)
     * **Vertical axis**: `category.keyword` (Top values)
     * **Cell value**: `Sum(taxful_total_price)`
-    * **Color palette**: Greens (sequential)
+    * **Color palette**: Positive (sequential)
 
-<!-- TODO: Add screenshot
 ![Heat map showing sales performance by product and region](/explore-analyze/images/heat-map-example-sales-performance.png "=70%")
--->

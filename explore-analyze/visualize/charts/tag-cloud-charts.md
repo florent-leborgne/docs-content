@@ -70,46 +70,6 @@ Refer to [Tag cloud chart settings](#tag-cloud-chart-settings) to find all confi
 
 ::::::
 
-## Advanced tag cloud chart scenarios
-
-### Visualize popular content [popular-content]
-
-Use tag clouds to show the most frequently accessed or requested content.
-
-#### Example: Popular URLs
-
-This example uses the [sample web logs data](/manage-data/ingest/sample-data.md) to visualize the most requested pages.
-
-1. Create a **Tag cloud** chart using the **{{kib}} Sample Data Logs** {{data-source}}.
-2. For the **Tags** dimension, select `request.keyword` with **Top values** (top 30).
-3. For the **Metric**, select **Count** to show the number of requests for each URL.
-4. Select {icon}`brush` **Style** and adjust the font size range for better readability.
-
-The resulting tag cloud shows the most popular pages, with more frequently accessed pages appearing larger.
-
-<!-- TODO: Add screenshot
-![Tag cloud showing popular URLs](/explore-analyze/images/tag-cloud-scenario-popular-content.png "=70%")
--->
-
-### Show keyword frequency in logs [log-keywords]
-
-Tag clouds can highlight frequently occurring terms in log messages or error text.
-
-#### Example: Common error messages
-
-1. Create a **Tag cloud** chart using your log {{data-source}}.
-2. For the **Tags** dimension, select your error message or keyword field with **Top values**.
-3. For the **Metric**, select **Count**.
-4. Filter to show only error-level messages using the query bar.
-
-### Use custom colors for categories [category-colors]
-
-Apply colors to make tag clouds more informative.
-
-1. Create a **Tag cloud** chart with your tags configured.
-2. In the **Tags** dimension configuration, select **Color mapping**.
-3. Assign specific colors to important categories using the [color mapping feature](../lens.md#assign-colors-to-terms).
-
 ## Tag cloud chart settings [tag-cloud-chart-settings]
 
 Customize your tag cloud chart to display exactly the information you need, formatted the way you want.

@@ -75,9 +75,9 @@ Refer to [Waffle chart settings](#waffle-chart-settings) to find all configurati
 
 ## Advanced waffle chart scenarios
 
-### Show percentage completion [percentage-completion]
+### Show percentage completion with multiple metrics [percentage-completion]
 
-Use a waffle chart to visualize progress toward a goal as a percentage.
+You can use [multiple metrics](#multiple-metrics) to show progress toward a goal as a percentage, with filled squares for completed work and empty squares for remaining work.
 
 1. Create a **Waffle** chart and remove any existing **Group by** dimension.
 2. Open **Layer settings**:
@@ -89,42 +89,9 @@ Use a waffle chart to visualize progress toward a goal as a percentage.
    - **Remaining**: A formula representing remaining items (for example, `goal - completed`)
 5. Assign distinct colors (for example, green for completed, gray for remaining).
 
-The waffle shows filled squares for completed work and empty (gray) squares for remaining work.
-
 <!-- TODO: Add screenshot
 ![Waffle chart showing percentage completion with two metrics](/explore-analyze/images/waffle-scenario-completion.png "=70%")
 -->
-
-### Compare survey responses [survey-responses]
-
-Waffle charts are excellent for visualizing Likert scale responses or categorical survey data.
-
-#### Example: Customer satisfaction breakdown
-
-1. Create a **Waffle** chart using your survey data.
-2. For the **Group by** dimension, select your satisfaction rating field with **Top values**.
-3. Set the **Metric** to **Count**.
-4. Assign colors that match the sentiment:
-   - Very satisfied: Dark green
-   - Satisfied: Light green
-   - Neutral: Gray
-   - Dissatisfied: Light red
-   - Very dissatisfied: Dark red
-
-The resulting waffle shows each response category with intuitive coloring.
-
-<!-- TODO: Add screenshot
-![Waffle chart showing customer satisfaction breakdown](/explore-analyze/images/waffle-scenario-survey.png "=70%")
--->
-
-### Group smaller values as "Other" [other-category]
-
-When you have many small categories, group them to keep the visualization readable.
-
-1. In the **Group by** configuration, select the field.
-2. Use **Top values** to limit the number of categories displayed.
-3. Expand **Advanced**.
-4. Enable **Group other values as "Other"** to combine remaining values.
 
 ## Waffle chart settings [waffle-chart-settings]
 
