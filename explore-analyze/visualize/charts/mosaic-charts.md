@@ -89,6 +89,10 @@ The resulting mosaic shows:
 - Column widths representing the proportion of each operating system
 - Rectangle heights within each column showing the distribution of countries for that OS
 
+<!-- TODO: Add screenshot
+![Mosaic chart showing OS usage by country](/explore-analyze/images/mosaic-scenario-category-associations.png "=70%")
+-->
+
 ### Compare distributions across segments [segment-comparison]
 
 Mosaic charts reveal whether distributions differ across segments.
@@ -100,6 +104,10 @@ Mosaic charts reveal whether distributions differ across segments.
 3. For the **Vertical axis**, select `category.keyword` with **Top values** (top 6).
 
 If the rectangle heights are similar across columns, the distribution is independent. If heights vary significantly, there's an association between gender and category preference.
+
+<!-- TODO: Add screenshot
+![Mosaic chart showing product categories by customer gender](/explore-analyze/images/mosaic-scenario-segment-comparison.png "=70%")
+-->
 
 ### Group smaller categories [other-category]
 
@@ -158,7 +166,7 @@ The **Vertical axis** dimension defines the rows within each column. Rectangle h
 The **Metric** dimension defines the value used to calculate rectangle sizes. In mosaic charts, this is typically **Count**.
 
 **Data**
-:   The value that determines rectangle proportions. You can use aggregation functions like `Count`, `Sum`, or create custom calculations with formulas. Refer to [](/explore-analyze/visualize/lens.md#lens-formulas) for examples.
+:   The value that determines rectangle proportions. You can use aggregation functions like `Count`, `Sum`, or create custom calculations with [formulas](/explore-analyze/visualize/lens.md#lens-formulas).
 
     :::{include} ../../_snippets/lens-value-advanced-settings.md
     :::
@@ -175,10 +183,13 @@ When creating or editing a visualization, you can customize several appearance o
 
 **Titles and text**
 
-**Labels**
-:   Control how labels appear on rectangles:
-    - **Show**: Display labels on rectangles where space permits.
-    - **Hide**: Do not display labels on rectangles.
+**Values**
+:   Control what values appear on rectangles:
+    - **Percentage**: Display the percentage of total (default).
+    - **Integer**: Display the raw numeric value.
+    - **Hide**: Do not display values.
+
+    When displaying percentages, you can also configure the **Decimal places** (default: 2).
 
 #### Legend settings
 
@@ -188,11 +199,20 @@ When creating or editing a visualization, you can customize several appearance o
     - **Show**: Always show the legend.
     - **Hide**: Never show the legend.
 
-**Label truncation**
-:   Choose whether to truncate long legend labels, and set a limit for how many lines to display.
+**Position**
+:   Set the legend position: **Right** (default), **Left**, **Top**, or **Bottom**.
 
-**Width**
-:   Set the width of the legend.
+**Nested**
+:   When using both axes, enable this option to show the legend in a hierarchical format.
+
+**Statistics**
+:   Show the **Value** statistic in the legend to display the numeric value alongside each legend entry.
+
+**Truncate**
+:   Toggle whether to truncate long legend labels, and set a maximum number of lines (default: 1).
+
+**Legend size**
+:   Control the size of the legend panel: **Auto** (default), **Small**, **Medium**, **Large**, or **Extra large**.
 
 ## Mosaic chart examples
 
@@ -206,6 +226,10 @@ The following examples show various configuration options for building impactful
     * **Vertical axis**: `geo.src` (Top 5 values)
     * **Metric**: Count
 
+<!-- TODO: Add screenshot
+![Mosaic chart showing OS by country](/explore-analyze/images/mosaic-example-os-by-country.png "=70%")
+-->
+
 **Product category by customer segment**
 :   Show purchasing patterns across customer segments:
 
@@ -214,6 +238,10 @@ The following examples show various configuration options for building impactful
     * **Vertical axis**: `category.keyword` (Top 5 values)
     * **Metric**: Count
 
+<!-- TODO: Add screenshot
+![Mosaic chart showing product categories by gender](/explore-analyze/images/mosaic-example-category-by-gender.png "=70%")
+-->
+
 **Response codes by request type**
 :   Analyze how different request types result in different response codes:
 
@@ -221,3 +249,7 @@ The following examples show various configuration options for building impactful
     * **Horizontal axis**: `request.keyword` (Top 5 values)
     * **Vertical axis**: `response.keyword` (Top values)
     * **Metric**: Count
+
+<!-- TODO: Add screenshot
+![Mosaic chart showing response codes by request type](/explore-analyze/images/mosaic-example-response-by-request.png "=70%")
+-->

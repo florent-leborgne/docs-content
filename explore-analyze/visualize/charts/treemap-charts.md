@@ -90,6 +90,10 @@ This example uses the [sample ecommerce data](/manage-data/ingest/sample-data.md
 
 The resulting treemap shows product categories as large rectangles, with individual products nested within each category.
 
+<!-- TODO: Add screenshot
+![Treemap showing sales by category and product](/explore-analyze/images/treemap-scenario-multi-level.png "=70%")
+-->
+
 ### Group small values into "Other" [other-category]
 
 When you have many small categories, group them to keep the visualization readable.
@@ -105,13 +109,14 @@ Be careful when using "Other" as it could end up being the largest category. If 
 
 ### Compare proportions across time [time-comparison]
 
-Create multiple treemaps to compare how proportions change over different time periods.
+Create treemaps using date-based grouping to compare how proportions change over time.
 
-1. Create a **Treemap** chart with your hierarchy configured.
-2. Add a **Breakdown** dimension using a date field with **Date histogram**.
+1. Create a **Treemap** chart.
+2. Add a **Group by** dimension using a date field with **Date histogram**.
 3. Set the interval to match your comparison needs (daily, weekly, monthly).
+4. Add a second **Group by** dimension for the category you want to compare.
 
-This creates a series of treemaps, one for each time period, allowing you to see how the distribution changes over time.
+This creates a treemap where the top-level rectangles represent time periods and the nested rectangles show the category distribution within each period.
 
 ## Treemap chart settings [treemap-chart-settings]
 
@@ -119,7 +124,7 @@ Customize your treemap chart to display exactly the information you need, format
 
 ### Group by settings [group-by-settings]
 
-The **Group by** dimension defines how rectangles are grouped. You can add up to 3 levels of grouping to create hierarchical visualizations.
+The **Group by** dimension defines how rectangles are grouped. You can add up to 2 levels of grouping to create hierarchical visualizations.
 
 **Data**
 :   The **Group by** dimension supports the following functions:
@@ -149,7 +154,7 @@ The **Group by** dimension defines how rectangles are grouped. You can add up to
 The **Metric** dimension defines the size of each rectangle.
 
 **Data**
-:   The value that determines rectangle size. When you drag a field onto the chart, {{kib}} suggests a function based on the field type. You can use aggregation functions like `Sum`, `Average`, `Count`, `Median`, and more, or create custom calculations with formulas. Refer to [](/explore-analyze/visualize/lens.md#lens-formulas) for examples.
+:   The value that determines rectangle size. When you drag a field onto the chart, {{kib}} suggests a function based on the field type. You can use aggregation functions like `Sum`, `Average`, `Count`, `Median`, and more, or create custom calculations with [formulas](/explore-analyze/visualize/lens.md#lens-formulas).
 
     :::{include} ../../_snippets/lens-value-advanced-settings.md
     :::
@@ -168,13 +173,16 @@ When creating or editing a visualization, you can customize several appearance o
 
 **Labels**
 :   Control how labels appear on rectangles:
-    - **Show**: Display labels on all rectangles where space permits.
+    - **Show**: Display labels on all rectangles where space permits (default).
     - **Hide**: Do not display labels on rectangles.
 
 **Values**
 :   Control what values appear on rectangles:
+    - **Percentage**: Display the percentage of total (default).
+    - **Integer**: Display the raw numeric value.
     - **Hide**: Do not display values.
-    - **Show**: Display the metric value on each rectangle.
+
+    When displaying percentages, you can also configure the **Decimal places** (default: 2).
 
 #### Legend settings
 
@@ -184,14 +192,20 @@ When creating or editing a visualization, you can customize several appearance o
     - **Show**: Always show the legend.
     - **Hide**: Never show the legend.
 
+**Position**
+:   Set the legend position: **Right** (default), **Left**, **Top**, or **Bottom**.
+
 **Nested**
 :   When using multiple **Group by** dimensions, enable this option to show the legend in a hierarchical format.
 
-**Label truncation**
-:   Choose whether to truncate long legend labels, and set a limit for how many lines to display.
+**Statistics**
+:   Show the **Value** statistic in the legend to display the numeric value alongside each legend entry.
 
-**Width**
-:   Set the width of the legend.
+**Truncate**
+:   Toggle whether to truncate long legend labels, and set a maximum number of lines (default: 1).
+
+**Legend size**
+:   Control the size of the legend panel: **Auto** (default), **Small**, **Medium**, **Large**, or **Extra large**.
 
 ## Treemap chart examples
 
@@ -204,6 +218,10 @@ The following examples show various configuration options for building impactful
     * **Group by**: `category.keyword` (Top 6 values)
     * **Metric**: `Sum(taxful_total_price)`
 
+<!-- TODO: Add screenshot
+![Treemap showing product sales by category](/explore-analyze/images/treemap-example-sales.png "=70%")
+-->
+
 **Website traffic by country and city**
 :   Show geographic distribution of website visitors:
 
@@ -212,6 +230,10 @@ The following examples show various configuration options for building impactful
     * **Group by** (Level 2): `geo.dest` (Top 3 values)
     * **Metric**: Count
 
+<!-- TODO: Add screenshot
+![Treemap showing website traffic by country and city](/explore-analyze/images/treemap-example-traffic.png "=70%")
+-->
+
 **Disk usage by host and mount point**
 :   Visualize storage consumption across your infrastructure:
 
@@ -219,3 +241,7 @@ The following examples show various configuration options for building impactful
     * **Group by** (Level 1): `host.name` (Top values)
     * **Group by** (Level 2): `system.filesystem.mount_point` (Top values)
     * **Metric**: `Max(system.filesystem.used.bytes)`
+
+<!-- TODO: Add screenshot
+![Treemap showing disk usage by host and mount point](/explore-analyze/images/treemap-example-disk.png "=70%")
+-->

@@ -87,6 +87,10 @@ This example uses the [sample web logs data](/manage-data/ingest/sample-data.md)
 
 The resulting map shows countries colored by traffic volume, with darker colors indicating more visitors.
 
+<!-- TODO: Add screenshot
+![Region map showing website traffic by country](/explore-analyze/images/region-map-scenario-global-traffic.png "=70%")
+-->
+
 ### Compare sales performance by region [sales-by-region]
 
 Use region maps to visualize sales or revenue distribution across geographic areas.
@@ -142,7 +146,7 @@ The region field must contain values that can be matched to geographic boundarie
 The **Metric** dimension defines the value that determines each region's color.
 
 **Data**
-:   The value that determines region color intensity. When you drag a field onto the chart, {{kib}} suggests a function based on the field type. You can use aggregation functions like `Sum`, `Average`, `Count`, `Median`, and more, or create custom calculations with formulas. Refer to [](/explore-analyze/visualize/lens.md#lens-formulas) for examples.
+:   The value that determines region color intensity. When you drag a field onto the chart, {{kib}} suggests a function based on the field type. You can use aggregation functions like `Sum`, `Average`, `Count`, `Median`, and more, or create custom calculations with [formulas](/explore-analyze/visualize/lens.md#lens-formulas).
 
     :::{include} ../../_snippets/lens-value-advanced-settings.md
     :::
@@ -200,6 +204,10 @@ The following examples show various configuration options for building impactful
     * **Color palette**: Blues (sequential)
     * **Layer**: World countries
 
+<!-- TODO: Add screenshot
+![Region map showing website traffic by country](/explore-analyze/images/region-map-example-traffic.png "=70%")
+-->
+
 **Customer distribution by state**
 :   Show where your customers are located within a country:
 
@@ -209,6 +217,10 @@ The following examples show various configuration options for building impactful
     * **Color palette**: Greens (sequential)
     * **Layer**: US states (if applicable)
 
+<!-- TODO: Add screenshot
+![Region map showing customer distribution by state](/explore-analyze/images/region-map-example-customers.png "=70%")
+-->
+
 **Revenue per capita by country**
 :   Compare normalized revenue across countries:
 
@@ -217,3 +229,7 @@ The following examples show various configuration options for building impactful
     * **Metric**: Formula `sum(revenue) / sum(population)`
     * **Color palette**: Oranges (sequential)
     * **Layer**: World countries
+
+<!-- TODO: Add screenshot
+![Region map showing revenue per capita by country](/explore-analyze/images/region-map-example-revenue.png "=70%")
+-->

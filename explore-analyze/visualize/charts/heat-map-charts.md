@@ -40,13 +40,12 @@ Using the **Visualization type** dropdown, select **Heat map**.
 :::::{step} Define the data to show
 1. Select the {{data-source}} that contains your data.
 2. Configure the [**Horizontal axis**](#horizontal-axis-settings) dimension to define the columns of the heat map.
-3. Configure the [**Vertical axis**](#vertical-axis-settings) dimension to define the rows of the heat map.
-4. Configure the [**Cell value**](#cell-value-settings) dimension to define the metric that determines cell colors.
+3. Configure the [**Cell value**](#cell-value-settings) dimension to define the metric that determines cell colors.
 
 Optionally:
-   - Add a **Breakdown** dimension to split the heat map into multiple charts.
+   - Configure the [**Vertical axis**](#vertical-axis-settings) dimension to define the rows of the heat map. Without a vertical axis, the heat map displays a single row of colored cells.
 
-The chart preview updates to show a grid of colored cells. Cell colors represent the magnitude of the metric value. If the grid appears empty, verify that both axes have data for the current time range.
+The chart preview updates to show a grid of colored cells. Cell colors represent the magnitude of the metric value. If the grid appears empty, verify that the axes have data for the current time range.
 :::::
 
 :::::{step} Customize the chart to follow best practices
@@ -88,9 +87,13 @@ This example uses the [sample web logs data](/manage-data/ingest/sample-data.md)
 2. For the **Horizontal axis**, select `@timestamp` with **Date histogram** and interval set to **Hour of day**.
 3. For the **Vertical axis**, select `@timestamp` with **Date histogram** and interval set to **Day of week**.
 4. For the **Cell value**, select **Count** to show the number of requests.
-5. Select {icon}`brush` **Style** and choose a sequential color palette.
+5. Select the **Cell value** dimension and choose a sequential color palette.
 
 The resulting heat map shows traffic intensity across hours and days, making it easy to identify peak periods.
+
+<!-- TODO: Add screenshot
+![Heat map showing website traffic intensity by hour and day of week](/explore-analyze/images/heat-map-scenario-time-patterns.png "=70%")
+-->
 
 ### Compare categories with a heat map [category-comparison]
 
@@ -105,18 +108,25 @@ Use heat maps to compare metrics across two categorical dimensions.
 
 This heat map reveals which regions experience more errors or specific response patterns.
 
+<!-- TODO: Add screenshot
+![Heat map showing response codes by geographic region](/explore-analyze/images/heat-map-scenario-category-comparison.png "=70%")
+-->
+
 ### Highlight anomalies with color ranges [anomaly-colors]
 
 Configure color ranges to emphasize unusual values.
 
 1. Create a **Heat map** chart with your dimensions configured.
-2. Select {icon}`brush` **Style**.
-3. In **Color**, enable **Custom ranges**.
-4. Define ranges that highlight normal versus anomalous values:
+2. Select the **Cell value** dimension to open its settings.
+3. In the **Color palette** configuration, define custom color ranges that highlight normal versus anomalous values:
    - Normal range: Neutral colors (blues, grays)
    - Anomalous range: Attention-grabbing colors (red, orange)
 
 This approach makes outliers immediately visible.
+
+<!-- TODO: Add screenshot
+![Heat map with custom color ranges highlighting anomalous values](/explore-analyze/images/heat-map-scenario-anomaly-colors.png "=70%")
+-->
 
 ## Heat map chart settings [heat-map-chart-settings]
 
@@ -177,7 +187,7 @@ The **Vertical axis** dimension defines the rows of the heat map.
 The **Cell value** dimension defines the metric that determines cell colors.
 
 **Data**
-:   The value that determines cell color intensity. When you drag a field onto the chart, {{kib}} suggests a function based on the field type. You can use aggregation functions like `Sum`, `Average`, `Count`, `Median`, and more, or create custom calculations with formulas. Refer to [](/explore-analyze/visualize/lens.md#lens-formulas) for examples.
+:   The value that determines cell color intensity. When you drag a field onto the chart, {{kib}} suggests a function based on the field type. You can use aggregation functions like `Sum`, `Average`, `Count`, `Median`, and more, or create custom calculations with [formulas](/explore-analyze/visualize/lens.md#lens-formulas).
 
     :::{include} ../../_snippets/lens-value-advanced-settings.md
     :::
@@ -185,6 +195,7 @@ The **Cell value** dimension defines the metric that determines cell colors.
 **Appearance**
 :   - **Name**: Customize the metric label displayed in tooltips.
     - **Value format**: Control how numeric values are displayed (number, percent, bytes, and more).
+    - **Color palette**: Configure the color palette that maps cell values to colors. The default palette is **Temperature**. You can select a different palette, reverse the color direction, and define custom color ranges with specific value-to-color mappings.
 
 ### General layout [appearance-options]
 
@@ -192,34 +203,53 @@ When creating or editing a visualization, you can customize several appearance o
 
 #### Style settings
 
-**Color**
-
-**Palette**
-:   Choose a color palette for the heat map:
-    - **Sequential**: Colors range from light to dark, suitable for data ranging from low to high.
-    - **Diverging**: Colors diverge from a neutral midpoint, suitable for data with positive and negative values.
-
-**Custom ranges**
-:   Enable custom color ranges to define specific value-to-color mappings.
-
-**Reverse**
-:   Reverse the color palette direction.
-
 **Titles and text**
 
-**Show labels**
-:   Display the cell value as text inside each cell.
+**Value labels**
+:   Control whether cell values are displayed as text inside each cell:
+    - **Hide**: Do not display values in cells (default).
+    - **Show**: Display the metric value inside each cell.
+
+**Vertical axis**
+
+**Axis title**
+:   Show or hide the vertical axis title. When visible, you can enter a custom title or use the default field name.
+
+**Axis labels**
+:   Show or hide the labels on the vertical axis.
+
+**Horizontal axis**
+
+**Axis title**
+:   Show or hide the horizontal axis title. When visible, you can enter a custom title or use the default field name.
+
+**Axis labels**
+:   Show or hide the labels on the horizontal axis.
+
+**Orientation**
+:   Control the orientation of horizontal axis labels:
+    - **Horizontal**: Labels are displayed horizontally (default).
+    - **Vertical**: Labels are rotated 90 degrees.
+    - **Angled**: Labels are displayed at a 45-degree angle.
 
 #### Legend settings
 
 **Visibility**
-:   Specify whether to automatically show the legend or hide it:
-    - **Auto**: Show the legend when useful (default).
-    - **Show**: Always show the legend.
-    - **Hide**: Never show the legend.
+:   Show or hide the legend:
+    - **Show**: Display the legend (default).
+    - **Hide**: Do not display the legend.
 
 **Position**
-:   Set the legend position: **Top**, **Left**, **Right**, or **Bottom**.
+:   Set the legend position: **Right** (default), **Left**, **Top**, or **Bottom**.
+
+**Max lines**
+:   Set the maximum number of lines for legend labels (1-5). Defaults to 1.
+
+**Truncate**
+:   Toggle whether to truncate long legend labels.
+
+**Legend size**
+:   Control the size of the legend panel: **Auto** (default), **Small**, **Medium**, **Large**, or **Extra large**.
 
 ## Heat map chart examples
 
@@ -234,6 +264,10 @@ The following examples show various configuration options for building impactful
     * **Cell value**: Count
     * **Color palette**: Blues (sequential)
 
+<!-- TODO: Add screenshot
+![Heat map showing request volume by hour and day](/explore-analyze/images/heat-map-example-request-volume.png "=70%")
+-->
+
 **Error rates by endpoint and status code**
 :   Identify which endpoints have the most errors:
 
@@ -243,6 +277,10 @@ The following examples show various configuration options for building impactful
     * **Cell value**: Count
     * **Color palette**: Reds (sequential, reversed for higher = darker)
 
+<!-- TODO: Add screenshot
+![Heat map showing error rates by endpoint and status code](/explore-analyze/images/heat-map-example-error-rates.png "=70%")
+-->
+
 **Sales performance by product and region**
 :   Compare product sales across geographic regions:
 
@@ -251,3 +289,7 @@ The following examples show various configuration options for building impactful
     * **Vertical axis**: `category.keyword` (Top values)
     * **Cell value**: `Sum(taxful_total_price)`
     * **Color palette**: Greens (sequential)
+
+<!-- TODO: Add screenshot
+![Heat map showing sales performance by product and region](/explore-analyze/images/heat-map-example-sales-performance.png "=70%")
+-->

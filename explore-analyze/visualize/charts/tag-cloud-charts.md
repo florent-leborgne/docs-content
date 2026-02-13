@@ -87,6 +87,10 @@ This example uses the [sample web logs data](/manage-data/ingest/sample-data.md)
 
 The resulting tag cloud shows the most popular pages, with more frequently accessed pages appearing larger.
 
+<!-- TODO: Add screenshot
+![Tag cloud showing popular URLs](/explore-analyze/images/tag-cloud-scenario-popular-content.png "=70%")
+-->
+
 ### Show keyword frequency in logs [log-keywords]
 
 Tag clouds can highlight frequently occurring terms in log messages or error text.
@@ -134,7 +138,7 @@ The **Tags** dimension defines the text labels that appear in the cloud.
 The **Metric** dimension defines the value that determines each tag's size.
 
 **Data**
-:   The value that determines tag size. When you drag a field onto the chart, {{kib}} suggests a function based on the field type. You can use aggregation functions like `Sum`, `Average`, `Count`, `Median`, and more, or create custom calculations with formulas. Refer to [](/explore-analyze/visualize/lens.md#lens-formulas) for examples.
+:   The value that determines tag size. When you drag a field onto the chart, {{kib}} suggests a function based on the field type. You can use aggregation functions like `Sum`, `Average`, `Count`, `Median`, and more, or create custom calculations with [formulas](/explore-analyze/visualize/lens.md#lens-formulas).
 
     :::{include} ../../_snippets/lens-value-advanced-settings.md
     :::
@@ -175,6 +179,10 @@ The following examples show various configuration options for building impactful
     * **Metric**: Count
     * **Orientation**: Single (horizontal)
 
+<!-- TODO: Add screenshot
+![Tag cloud showing popular request URLs](/explore-analyze/images/tag-cloud-example-urls.png "=70%")
+-->
+
 **Top product categories**
 :   Show which product categories are most popular:
 
@@ -183,6 +191,10 @@ The following examples show various configuration options for building impactful
     * **Metric**: Count
     * **Color mapping**: Distinct colors per category
 
+<!-- TODO: Add screenshot
+![Tag cloud showing top product categories](/explore-analyze/images/tag-cloud-example-categories.png "=70%")
+-->
+
 **Frequent log sources**
 :   Identify which systems generate the most log entries:
 
@@ -190,3 +202,7 @@ The following examples show various configuration options for building impactful
     * **Tags**: `host.name` or `service.name` (Top 25 values)
     * **Metric**: Count
     * **Orientation**: Right angled for visual variety
+
+<!-- TODO: Add screenshot
+![Tag cloud showing frequent log sources](/explore-analyze/images/tag-cloud-example-log-sources.png "=70%")
+-->

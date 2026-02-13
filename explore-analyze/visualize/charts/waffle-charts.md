@@ -91,6 +91,10 @@ Use a waffle chart to visualize progress toward a goal as a percentage.
 
 The waffle shows filled squares for completed work and empty (gray) squares for remaining work.
 
+<!-- TODO: Add screenshot
+![Waffle chart showing percentage completion with two metrics](/explore-analyze/images/waffle-scenario-completion.png "=70%")
+-->
+
 ### Compare survey responses [survey-responses]
 
 Waffle charts are excellent for visualizing Likert scale responses or categorical survey data.
@@ -109,6 +113,10 @@ Waffle charts are excellent for visualizing Likert scale responses or categorica
 
 The resulting waffle shows each response category with intuitive coloring.
 
+<!-- TODO: Add screenshot
+![Waffle chart showing customer satisfaction breakdown](/explore-analyze/images/waffle-scenario-survey.png "=70%")
+-->
+
 ### Group smaller values as "Other" [other-category]
 
 When you have many small categories, group them to keep the visualization readable.
@@ -124,7 +132,7 @@ Customize your waffle chart to display exactly the information you need, formatt
 
 ### Group by settings [group-by-settings]
 
-The **Group by** dimension defines how the waffle is divided into colored sections.
+The **Group by** dimension defines how the waffle is divided into colored sections. Waffle charts support a single **Group by** dimension.
 
 **Data**
 :   The **Group by** dimension supports the following functions:
@@ -154,7 +162,7 @@ The **Group by** dimension defines how the waffle is divided into colored sectio
 The **Metric** dimension defines the value for each category, determining how many squares each section occupies.
 
 **Data**
-:   The value that determines how many squares each category fills. When you drag a field onto the chart, {{kib}} suggests a function based on the field type. You can use aggregation functions like `Sum`, `Average`, `Count`, `Median`, and more, or create custom calculations with formulas. Refer to [](/explore-analyze/visualize/lens.md#lens-formulas) for examples.
+:   The value that determines how many squares each category fills. When you drag a field onto the chart, {{kib}} suggests a function based on the field type. You can use aggregation functions like `Sum`, `Average`, `Count`, `Median`, and more, or create custom calculations with [formulas](/explore-analyze/visualize/lens.md#lens-formulas).
 
     :::{include} ../../_snippets/lens-value-advanced-settings.md
     :::
@@ -176,37 +184,31 @@ Enable **Multiple metrics** in the layer settings to define each waffle section 
 
 ### General layout [appearance-options]
 
-When creating or editing a visualization, you can customize several appearance options from the {icon}`brush` **Style** or ![Legend icon](/explore-analyze/images/kibana-legend-icon.svg "") **Legend** menus.
+When creating or editing a visualization, you can customize the legend from the ![Legend icon](/explore-analyze/images/kibana-legend-icon.svg "") **Legend** menu.
 
-#### Style settings
-
-**Titles and text**
-
-**Show labels**
-:   Display labels on the waffle sections.
-
-**Show values**
-:   Control what values appear:
-    - **Hide**: Do not display values.
-    - **Percent**: Display the percentage of total.
-    - **Value**: Display the raw value.
+:::{note}
+Waffle charts do not have configurable style settings. The chart automatically displays labels and percentages on each section.
+:::
 
 #### Legend settings
 
 **Visibility**
 :   Specify whether to automatically show the legend or hide it:
-    - **Auto**: Show the legend when there are multiple categories (default).
-    - **Show**: Always show the legend.
+    - **Auto**: Show the legend when there are multiple categories.
+    - **Show**: Always show the legend (default).
     - **Hide**: Never show the legend.
 
+**Position**
+:   Set the legend position: **Right** (default), **Left**, **Top**, or **Bottom**.
+
 **Statistics**
-:   Show the **Value** statistic in the legend to display the numeric value alongside each legend entry.
+:   Show the **Value** statistic in the legend to display the numeric value alongside each legend entry. This is enabled by default.
 
-**Label truncation**
-:   Choose whether to truncate long legend labels, and set a limit for how many lines to display.
+**Truncate**
+:   Toggle whether to truncate long legend labels, and set a maximum number of lines (default: 1).
 
-**Width**
-:   Set the width of the legend.
+**Legend size**
+:   Control the size of the legend panel: **Auto** (default), **Small**, **Medium**, **Large**, or **Extra large**.
 
 ## Waffle chart examples
 
@@ -220,6 +222,10 @@ The following examples show various configuration options for building impactful
     * **Metric**: Count
     * **Color mapping**: Distinct colors for each browser
 
+<!-- TODO: Add screenshot
+![Waffle chart showing browser market share](/explore-analyze/images/waffle-example-browser.png "=70%")
+-->
+
 **Order status distribution**
 :   Show how orders are distributed across status categories:
 
@@ -227,6 +233,10 @@ The following examples show various configuration options for building impactful
     * **Group by**: `customer_gender` (Top values)
     * **Metric**: Count
     * **Legend**: Show with values
+
+<!-- TODO: Add screenshot
+![Waffle chart showing order status distribution](/explore-analyze/images/waffle-example-orders.png "=70%")
+-->
 
 **Project completion progress**
 :   Display progress toward a project milestone:
@@ -236,3 +246,7 @@ The following examples show various configuration options for building impactful
       - Tasks completed: `Count(kql='status: completed')`
       - Tasks remaining: `Count(kql='status: pending OR status: in_progress')`
     * **Colors**: Green for completed, gray for remaining
+
+<!-- TODO: Add screenshot
+![Waffle chart showing project completion progress](/explore-analyze/images/waffle-example-progress.png "=70%")
+-->
