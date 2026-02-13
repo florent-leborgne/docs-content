@@ -12,9 +12,7 @@ Gauge charts display a single value within a defined range, showing how close th
 
 You can create gauge charts in {{kib}} using [**Lens**](../lens.md).
 
-<!-- TODO: Add screenshot
-![Example Lens gauge chart showing CPU usage at 73%](/explore-analyze/images/gauge-chart-example.png)
--->
+![Example Lens gauge chart showing RAM consumption averages](/explore-analyze/images/gauge-chart-example.png)
 
 ## Build a gauge chart
 
@@ -40,7 +38,13 @@ Using the **Visualization type** dropdown, select **Gauge**.
 :::::{step} Define the data to show
 1. Select the {{data-source}} that contains your data.
 2. Configure the [**Metric**](#metric-settings) dimension to define the value displayed on the gauge.
-3. Optionally, configure the [**Maximum**](#maximum-settings) dimension to set a dynamic upper bound based on your data.
+
+Optionally:
+   - Configure the [**Minimum value**](#minimum-value-settings) dimension to set the lower bound of the gauge range.
+   - Configure the [**Maximum value**](#maximum-value-settings) dimension to set the upper bound of the gauge range.
+   - Configure the [**Goal**](#goal-settings) dimension to display a target marker on the gauge.
+
+Each of these optional dimensions can be set as a static number, computed dynamically from your data using an aggregation, or defined with a [formula](/explore-analyze/visualize/lens.md#lens-formulas).
 
 The chart preview updates to show a gauge with your metric value positioned within the range. If the gauge appears empty, verify that the selected field contains numeric data for the current time range.
 :::::
@@ -78,48 +82,44 @@ Use a gauge to track progress toward a specific target, such as monthly sales go
 
 1. Create a **Gauge** chart and select your {{data-source}}.
 2. Configure the **Metric** dimension with your progress value (for example, `Sum(sales_amount)`).
-3. Select {icon}`brush` **Style**.
-4. In **Appearance**, set:
-   - **Minimum**: `0`
-   - **Maximum**: Your target value (for example, `100000` for a $100K sales goal)
-   - **Goal**: Your target value to display a goal marker
-5. Configure color bands to show progress levels:
-   - 0-50%: Red (behind schedule)
-   - 50-80%: Yellow (on track)
-   - 80-100%: Green (ahead of schedule)
+3. Configure the **Minimum value** dimension as a static value of `0`.
+4. Configure the **Maximum value** dimension as a static value matching your target (for example, `100000` for a $100K sales goal).
+5. Configure the **Goal** dimension as a static value matching your target to display a goal marker on the gauge.
+6. Select the **Metric** dimension, enable **Band colors**, and configure **Color mapping** with bands to show progress levels.
+
+![Example Lens gauge chart showing yearly sales goal](/explore-analyze/images/gauge-chart-scenario-goal.png "=75%")
 
 ### Configure color bands for thresholds [color-bands]
 
 Color bands help users quickly understand whether a value is within acceptable ranges.
 
 1. Create a **Gauge** chart with your metric configured.
-2. Select {icon}`brush` **Style**.
-3. In **Appearance**, select **Custom color bands**.
-4. Add color ranges by specifying:
-   - **From**: The starting value for this band
-   - **To**: The ending value for this band
-   - **Color**: The color to display for values in this range
-5. Add multiple bands to create threshold indicators.
+2. Select the **Metric** dimension to open its settings.
+3. Enable **Band colors**.
+4. In **Color mapping**, select a color palette (or use the default **Status** palette) and adjust the band boundaries and colors.
+5. Optionally, enable **Ticks on bands** to display tick marks at the band boundaries on the gauge scale.
 
 #### Example: Server health monitoring
 
-This example creates a gauge showing server response time with color-coded health indicators.
+This example shows a gauge with server response time and color-coded health indicators.
 
 | Band | Range | Color | Meaning |
 |------|-------|-------|---------|
 | Healthy | 0-200ms | Green | Normal response times |
-| Warning | 200-500ms | Yellow | Elevated response times |
+| Warning | 200-500ms | Light green | Elevated response times |
 | Critical | 500ms+ | Red | Unacceptable performance |
 
-### Use a dynamic maximum [dynamic-maximum]
+![Example Lens gauge chart showing average response time in milliseconds](/explore-analyze/images/gauge-chart-scenario-thresholds.png "=50%")
 
-Instead of setting a fixed maximum value, you can use a field from your data to set the maximum dynamically.
+### Use dynamic bounds and goals [dynamic-bounds]
+
+Instead of entering fixed static values, you can use fields from your data to set the minimum, maximum, or goal dynamically using aggregations.
 
 1. Create a **Gauge** chart with your metric configured.
-2. Add a **Maximum** dimension.
-3. Select a field and aggregation that represents the upper bound (for example, `Max(quota)` for a quota-based gauge).
+2. In the **Maximum value** dimension, select a field and aggregation that represents the upper bound (for example, `Max(quota)` for a quota-based gauge).
+3. Optionally, do the same for **Minimum value** (for example, `Min(baseline)`) or **Goal** (for example, `Average(target)`).
 
-This approach is useful when targets vary by category, time period, or user.
+This approach is useful when bounds or targets vary by category, time period, or user. You can also use formulas to define dynamic bounds or goals. Refer to [Lens formulas](/explore-analyze/visualize/lens.md#lens-formulas) for more details.
 
 ## Gauge chart settings [gauge-chart-settings]
 
@@ -127,10 +127,10 @@ Customize your gauge chart to display exactly the information you need, formatte
 
 ### Metric settings [metric-settings]
 
-The **Metric** dimension defines the value displayed on the gauge.
+The **Metric** dimension defines the main value displayed on the gauge.
 
 **Data**
-:   The value that the gauge displays. When you drag a field onto the chart, {{kib}} suggests a function based on the field type. You can use aggregation functions like `Sum`, `Average`, `Count`, `Median`, `Last value`, and more, or create custom calculations with formulas. Refer to [](/explore-analyze/visualize/lens.md#lens-formulas) for examples.
+:   The value that the gauge displays. When you drag a field onto the chart, {{kib}} suggests a function based on the field type. You can use aggregation functions like `Sum`, `Average`, `Count`, `Median`, `Last value`, and more, or create custom calculations with [formulas](/explore-analyze/visualize/lens.md#lens-formulas).
 
     :::{include} ../../_snippets/lens-value-advanced-settings.md
     :::
@@ -138,21 +138,43 @@ The **Metric** dimension defines the value displayed on the gauge.
 **Appearance**
 :   - **Name**: Customize the metric label displayed in the gauge.
     - **Value format**: Control how numeric values are displayed (number, percent, bytes, and more).
-    - **Color**: Override the default color for the metric value.
+    - **Band colors**: Toggle to enable colored bands on the gauge. When enabled, the following options appear:
+      - **Color mapping**: Configure the color palette and define color stops for the bands. The default palette is **Status** with 4 color steps.
+      - **Ticks on bands**: Toggle to place tick marks at band boundaries instead of distributing them evenly along the gauge scale.
 
-### Maximum settings [maximum-settings]
+### Minimum value settings [minimum-value-settings]
 
-The **Maximum** dimension optionally defines a dynamic upper bound for the gauge.
+The **Minimum value** dimension defines the lower bound of the gauge range.
 
 **Data**
-:   A field and aggregation that sets the maximum value dynamically. Useful when the upper bound varies based on your data (for example, quotas, targets, or capacity limits).
+:   Set a static value, use a field with an aggregation like `Min`, or create a custom calculation with a [formula](/explore-analyze/visualize/lens.md#lens-formulas). When adding this dimension, you can enter a fixed number directly (static value) or select a field to compute the minimum dynamically. If not configured, the gauge infers a minimum from the data.
 
     :::{include} ../../_snippets/lens-value-advanced-settings.md
     :::
 
-**Appearance**
-:   - **Name**: Customize the label for the maximum value.
-    - **Value format**: Control how the maximum value is displayed.
+    :::{note}
+    The minimum value must be less than the maximum value. If the minimum is greater than or equal to the maximum, the gauge displays an error.
+    :::
+
+### Maximum value settings [maximum-value-settings]
+
+The **Maximum value** dimension defines the upper bound of the gauge range.
+
+**Data**
+:   Set a static value, use a field with an aggregation like `Max`, or create a custom calculation with a [formula](/explore-analyze/visualize/lens.md#lens-formulas). When adding this dimension, you can enter a fixed number directly (static value) or select a field to compute the maximum dynamically. If not configured, the gauge infers a maximum from the data.
+
+    :::{include} ../../_snippets/lens-value-advanced-settings.md
+    :::
+
+### Goal settings [goal-settings]
+
+The **Goal** dimension displays a target marker on the gauge, providing a visual reference point for the metric value.
+
+**Data**
+:   Set a static value, use a field with an aggregation, or create a custom calculation with a [formula](/explore-analyze/visualize/lens.md#lens-formulas). When adding this dimension, you can enter a fixed number directly (static value) or select a field to compute the goal dynamically. The goal marker appears as a line or indicator on the gauge scale.
+
+    :::{include} ../../_snippets/lens-value-advanced-settings.md
+    :::
 
 ### General layout [appearance-options]
 
@@ -162,37 +184,23 @@ When creating or editing a visualization, you can customize several appearance o
 
 **Shape**
 :   Choose the gauge shape:
-    - **Minor arc**: A partial circle arc (default).
+    - **Linear**: A bar gauge, displayed horizontally (default) or vertically. Select **Horizontal** or **Vertical** orientation after choosing this shape.
+    - **Minor arc**: A partial circle arc.
     - **Major arc**: A larger circular arc.
     - **Circle**: A full 360-degree gauge.
-    - **Linear horizontal**: A horizontal bar gauge.
-    - **Linear vertical**: A vertical bar gauge.
-
-**Appearance**
-
-**Minimum**
-:   The minimum value for the gauge range. Defaults to `0`.
-
-**Maximum**
-:   The maximum value for the gauge range. Set this to your target or upper bound. Overridden if a **Maximum** dimension is configured.
-
-**Goal**
-:   An optional target value to display as a marker on the gauge.
-
-**Color**
-
-**Bands**
-:   Configure color bands to indicate threshold levels:
-    - **Auto**: Automatically assigns colors based on the palette.
-    - **Custom**: Define specific color ranges with From, To, and Color values.
 
 **Titles and text**
 
 **Title**
-:   Show or hide the metric title on the gauge.
+:   Control the gauge title:
+    - **Auto**: Display the metric name automatically (default).
+    - **Custom**: Enter a custom title.
+    - **None**: Hide the title.
 
 **Subtitle**
-:   Add a subtitle for additional context.
+:   Add an optional subtitle for additional context:
+    - **Custom**: Enter a custom subtitle.
+    - **None**: No subtitle (default).
 
 ## Gauge chart examples
 
@@ -205,17 +213,9 @@ The following examples show various configuration options for building impactful
     * **Metric**: `Average(system.cpu.total.pct)` formatted as percent
     * **Shape**: Minor arc
     * **Minimum**: 0, **Maximum**: 100
-    * **Color bands**: 0-70 (green), 70-90 (yellow), 90-100 (red)
+    * **Color bands**: 0-50% (green), 50-75% (yellow), 75-100% (red)
 
-**Sales progress toward goal**
-:   Track monthly sales against a target:
-
-    * Example based on: {{kib}} Sample Data eCommerce
-    * **Metric**: `Sum(taxful_total_price)`
-    * **Shape**: Major arc
-    * **Minimum**: 0, **Maximum**: 50000
-    * **Goal**: 50000
-    * **Color bands**: Custom gradient from red to green
+![Example Lens gauge chart showing average CPU usage in percent](/explore-analyze/images/gauge-chart-example-cpu.png "=50%")
 
 **Disk space utilization**
 :   Display disk space usage as a percentage of capacity:
@@ -224,4 +224,6 @@ The following examples show various configuration options for building impactful
     * **Metric**: Formula `sum(system.filesystem.used.bytes) / sum(system.filesystem.total.bytes) * 100`
     * **Shape**: Circle
     * **Minimum**: 0, **Maximum**: 100
-    * **Color bands**: 0-60 (green), 60-80 (yellow), 80-100 (red)
+    * **Color bands**: 0-60% (green), 60-80% (yellow), 80-100% (red)
+
+![Example Lens gauge chart showing disk space utilization in percent](/explore-analyze/images/gauge-chart-example-disk-space.png "=50%")
