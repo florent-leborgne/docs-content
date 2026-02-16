@@ -55,7 +55,7 @@ Tweak the appearance of the chart to your needs. Consider the following best pra
 :   Keep your waffle chart to a maximum of 6-8 categories. More categories make the chart difficult to read.
 
 **Use intuitive colors**
-:   Assign colors that have semantic meaning when possible (for example, green for success, red for errors). Use the [color mapping feature](../lens.md#assign-colors-to-terms) for consistent coloring.
+:   Assign colors that have semantic meaning when possible. Use the [color mapping feature](../lens.md#assign-colors-to-terms) for consistent coloring.
 
 **Order categories meaningfully**
 :   Arrange categories from largest to smallest or in a natural order (such as satisfaction ratings from low to high).
@@ -108,16 +108,20 @@ The **Group by** dimension defines how the waffle is divided into colored sectio
       - **Number of values**: How many top values to display.
       :::{include} ../../_snippets/lens-rank-by-options.md
       :::
+      - **Collapse by**: Aggregate values into a single number using `Sum`, `Average`, `Min`, or `Max`.
       :::{include} ../../_snippets/lens-breakdown-advanced-settings.md
       :::
     - **Date histogram**: Group data into time-based buckets.
       - **Field**: Select the date field to use for the time-based grouping.
       :::{include} ../../_snippets/lens-histogram-settings.md
       :::
+      - **Collapse by**: Aggregate values into a single number using `Sum`, `Average`, `Min`, or `Max`.
     - **Intervals**: Create numeric ranges for continuous data.
       - **Field**: Select the numeric field to create intervals from.
       - **Include empty rows**: Include intervals with no matching documents.
+      - **Collapse by**: Aggregate values into a single number using `Sum`, `Average`, `Min`, or `Max`.
     - **Filters**: Define custom KQL filters to create specific sections.
+      - **Collapse by**: Aggregate values into a single number using `Sum`, `Average`, `Min`, or `Max`.
 
 **Appearance**
 :   - **Name**: Customize the legend label.

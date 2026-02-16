@@ -12,9 +12,7 @@ Mosaic charts display the relationship between two categorical variables as a gr
 
 You can create mosaic charts in {{kib}} using [**Lens**](../lens.md).
 
-<!-- TODO: Add screenshot
-![Example Lens mosaic chart showing order status by product category](/explore-analyze/images/mosaic-chart-example.png)
--->
+![Example Lens mosaic chart showing response status by operating system](/explore-analyze/images/mosaic-chart-example.png)
 
 ## Build a mosaic chart
 
@@ -41,7 +39,7 @@ Using the **Visualization type** dropdown, select **Mosaic**.
 1. Select the {{data-source}} that contains your data.
 2. Configure the [**Horizontal axis**](#horizontal-axis-settings) dimension to define the columns. The width of each column represents the proportion of data in that category.
 3. Configure the [**Vertical axis**](#vertical-axis-settings) dimension to define the rows within each column. The height of each rectangle represents the proportion within that column.
-4. The **Metric** is automatically set to **Count**. This determines the size of each rectangle.
+4. Configure the [**Metric**](#metric-settings) dimension to define the value used to calculate rectangle sizes. This defaults to **Count**.
 
 The chart preview updates to show a grid of rectangles. Column widths represent the proportion of each horizontal category, and rectangle heights within each column show the distribution of vertical categories.
 :::::
@@ -52,21 +50,21 @@ Tweak the appearance of the chart to your needs. Consider the following best pra
 **Limit categories**
 :   Keep both dimensions to a maximum of 6-8 categories each. More categories create tiny rectangles that are hard to read.
 
+**Ensure balanced proportions**
+:   Mosaic charts work best when categories have roughly comparable sizes. If one category dominates (for example, one host handling 90% of traffic), the other columns become too narrow to read. In that case, consider using a [bar chart](bar-charts.md) instead.
+
 **Order categories meaningfully**
-:   Arrange categories in a logical order (by size, alphabetically, or by a natural ordering) to make patterns easier to identify.
+:   Arrange categories in a logical order (by size, alphabetically, or by a natural order) to make patterns easier to identify.
 
 **Use color for the vertical dimension**
 :   Colors typically represent the vertical axis categories, making it easier to track how each category appears across columns.
-
-**Consider aspect ratio**
-:   Wide mosaics work better for data with many horizontal categories. Square mosaics work better for balanced data.
 
 Refer to [Mosaic chart settings](#mosaic-chart-settings) to find all configuration options for your mosaic chart.
 :::::
 
 :::::{step} Save the chart
 - If you accessed Lens from a dashboard, select **Save and return** to save the visualization and add it to that dashboard, or select **Save to library** to add the visualization to the Visualize library and reuse it later.
-- If you accessed Lens from the Visualize library, select **Save**. A menu opens and offers you to add the visualization to a dashboard and to the Visualize library.
+- If you accessed Lens from the Visualize library, select **Save**. A menu opens and lets you add the visualization to a dashboard and to the Visualize library.
 :::::
 
 ::::::
@@ -87,12 +85,24 @@ The **Horizontal axis** dimension defines the columns of the mosaic. Column widt
       - **Number of values**: How many categories to display.
       :::{include} ../../_snippets/lens-rank-by-options.md
       :::
+      - **Collapse by**: Aggregate values into a single number using `Sum`, `Average`, `Min`, or `Max`.
       :::{include} ../../_snippets/lens-breakdown-advanced-settings.md
       :::
+    - **Date histogram**: Group data into time-based buckets.
+      - **Field**: Select the date field to use for the time-based grouping.
+      :::{include} ../../_snippets/lens-histogram-settings.md
+      :::
+      - **Collapse by**: Aggregate values into a single number using `Sum`, `Average`, `Min`, or `Max`.
+    - **Intervals**: Create numeric ranges for continuous data.
+      - **Field**: Select the numeric field to create intervals from.
+      - **Include empty rows**: Include intervals with no matching documents.
+      - **Collapse by**: Aggregate values into a single number using `Sum`, `Average`, `Min`, or `Max`.
     - **Filters**: Define custom KQL filters to create specific columns.
+      - **Collapse by**: Aggregate values into a single number using `Sum`, `Average`, `Min`, or `Max`.
 
 **Appearance**
 :   - **Name**: Customize the axis label.
+    - **Value format**: Control how numeric values are displayed (number, percent, bytes, and more).
 
 ### Vertical axis settings [vertical-axis-settings]
 
@@ -106,9 +116,20 @@ The **Vertical axis** dimension defines the rows within each column. Rectangle h
       - **Number of values**: How many categories to display.
       :::{include} ../../_snippets/lens-rank-by-options.md
       :::
+      - **Collapse by**: Aggregate values into a single number using `Sum`, `Average`, `Min`, or `Max`.
       :::{include} ../../_snippets/lens-breakdown-advanced-settings.md
       :::
+    - **Date histogram**: Group data into time-based buckets.
+      - **Field**: Select the date field to use for the time-based grouping.
+      :::{include} ../../_snippets/lens-histogram-settings.md
+      :::
+      - **Collapse by**: Aggregate values into a single number using `Sum`, `Average`, `Min`, or `Max`.
+    - **Intervals**: Create numeric ranges for continuous data.
+      - **Field**: Select the numeric field to create intervals from.
+      - **Include empty rows**: Include intervals with no matching documents.
+      - **Collapse by**: Aggregate values into a single number using `Sum`, `Average`, `Min`, or `Max`.
     - **Filters**: Define custom KQL filters to create specific rows.
+      - **Collapse by**: Aggregate values into a single number using `Sum`, `Average`, `Min`, or `Max`.
 
 **Appearance**
 :   - **Name**: Customize the axis label.
@@ -119,14 +140,18 @@ The **Vertical axis** dimension defines the rows within each column. Rectangle h
 The **Metric** dimension defines the value used to calculate rectangle sizes. In mosaic charts, this is typically **Count**.
 
 **Data**
-:   The value that determines rectangle proportions. You can use aggregation functions like `Count`, `Sum`, or create custom calculations with [formulas](/explore-analyze/visualize/lens.md#lens-formulas).
+:   The value that determines rectangle proportions. You can use aggregation functions like `Count` or `Sum`, or create custom calculations with [formulas](/explore-analyze/visualize/lens.md#lens-formulas).
 
     :::{include} ../../_snippets/lens-value-advanced-settings.md
     :::
 
-:::{note}
-Mosaic charts do not support multiple metrics. Each cell represents a single count or aggregated value.
-:::
+**Appearance**
+:   - **Name**: Customize the metric label displayed in tooltips and legends.
+    - **Value format**: Control how numeric values are displayed (number, percent, bytes, and more).
+
+    :::{note}
+    Mosaic charts do not support multiple metrics. Each cell represents a single count or aggregated value.
+    :::
 
 ### General layout [appearance-options]
 
@@ -134,9 +159,7 @@ When creating or editing a visualization, you can customize several appearance o
 
 #### Style settings
 
-**Titles and text**
-
-**Values**
+**Slice values**
 :   Control what values appear on rectangles:
     - **Percentage**: Display the percentage of total (default).
     - **Integer**: Display the raw numeric value.
@@ -148,61 +171,43 @@ When creating or editing a visualization, you can customize several appearance o
 
 **Visibility**
 :   Specify whether to automatically show the legend or hide it:
-    - **Auto**: Show the legend when there are multiple categories (default).
+    - **Auto**: Show the legend when there are multiple categories.
     - **Show**: Always show the legend.
-    - **Hide**: Never show the legend.
+    - **Hide**: Never show the legend (default).
 
-**Position**
-:   Set the legend position: **Right** (default), **Left**, **Top**, or **Bottom**.
+**Width**
+:   Control the width of the legend panel: **Small**, **Medium** (default), **Large**, or **Extra large**.
 
 **Nested**
-:   When using both axes, enable this option to show the legend in a hierarchical format.
+:   When using both horizontal and vertical axes, enable this option to show the legend in a hierarchical format.
 
-**Statistics**
-:   Show the **Value** statistic in the legend to display the numeric value alongside each legend entry.
-
-**Truncate**
-:   Toggle whether to truncate long legend labels, and set a maximum number of lines (default: 1).
-
-**Legend size**
-:   Control the size of the legend panel: **Auto** (default), **Small**, **Medium**, **Large**, or **Extra large**.
+**Label truncation**
+:   Toggle whether to truncate long legend labels. When enabled, set the **Line limit** to control how many lines to display before truncating (1-5, default: 1).
 
 ## Mosaic chart examples
 
 The following examples show various configuration options for building impactful mosaic charts.
 
-**Operating system by country**
-:   Visualize how operating system usage varies by geographic region:
+**Response status by operating system**
+:   Visualize how response status categories vary across operating systems:
 
     * Example based on: {{kib}} Sample Data Logs
     * **Horizontal axis**: `machine.os.keyword` (Top 5 values)
-    * **Vertical axis**: `geo.src` (Top 5 values)
+    * **Vertical axis**: **Filters**
+      - "Success (2xx/3xx)": `response.keyword >= "200" AND response.keyword < "400"`
+      - "Client errors (4xx)": `response.keyword >= "400" AND response.keyword < "500"`
+      - "Server errors (5xx)": `response.keyword >= "500"`
     * **Metric**: Count
+    * **Color mapping**: Green for success, yellow for client errors, red for server errors
 
-<!-- TODO: Add screenshot
-![Mosaic chart showing OS by country](/explore-analyze/images/mosaic-example-os-by-country.png "=70%")
--->
+![Mosaic chart showing response status by operating system](/explore-analyze/images/mosaic-example-response-by-os.png "=70%")
 
-**Product category by customer segment**
-:   Show purchasing patterns across customer segments:
+**Product categories by continent**
+:   Show how product preferences vary across regions:
 
     * Example based on: {{kib}} Sample Data eCommerce
-    * **Horizontal axis**: `customer_gender` (Top values)
+    * **Horizontal axis**: `geoip.continent_name` (Top values)
     * **Vertical axis**: `category.keyword` (Top 5 values)
     * **Metric**: Count
 
-<!-- TODO: Add screenshot
-![Mosaic chart showing product categories by gender](/explore-analyze/images/mosaic-example-category-by-gender.png "=70%")
--->
-
-**Response codes by request type**
-:   Analyze how different request types result in different response codes:
-
-    * Example based on: {{kib}} Sample Data Logs
-    * **Horizontal axis**: `request.keyword` (Top 5 values)
-    * **Vertical axis**: `response.keyword` (Top values)
-    * **Metric**: Count
-
-<!-- TODO: Add screenshot
-![Mosaic chart showing response codes by request type](/explore-analyze/images/mosaic-example-response-by-request.png "=70%")
--->
+![Mosaic chart showing product categories by continent](/explore-analyze/images/mosaic-example-category-by-continent.png "=70%")
