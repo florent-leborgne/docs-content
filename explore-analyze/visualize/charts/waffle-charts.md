@@ -8,13 +8,13 @@ description: Instructions and best practices for building waffle charts with Kib
 
 # Build waffle charts with {{kib}}
 
-Waffle charts display data as a grid of small squares, where each square represents a portion of the whole. They are ideal for showing percentages, visualizing survey results, and making proportions intuitive by representing data as discrete units. They work best with fewer than 10 categories.
+Waffle charts display data as a 10x10 grid of small squares, where each square represents 1% of the whole. They are ideal for showing percentages, visualizing survey results, and making proportions intuitive by representing data as discrete units. They work best with fewer than 10 categories.
+
+Like [pie charts](pie-charts.md), waffle charts show part-to-whole relationships. However, waffle charts make it easier to compare similarly-sized proportions (for example, 23% vs. 27%) because areas in a grid are easier to distinguish than angles in a circle. Choose a pie chart when you have a small number of slices (2-4) with clearly different sizes, or when you want to use a donut layout.
 
 You can create waffle charts in {{kib}} using [**Lens**](../lens.md).
 
-<!-- TODO: Add screenshot
-![Example Lens waffle chart showing browser market share](/explore-analyze/images/waffle-chart-example.png)
--->
+![Example Lens waffle charts showing response status breakdown and OS distribution](/explore-analyze/images/waffle-chart-example.png)
 
 ## Build a waffle chart
 
@@ -43,7 +43,7 @@ Using the **Visualization type** dropdown, select **Waffle**.
 3. Configure the [**Metric**](#metric-settings) dimension to define the value for each category. This determines how many squares each category occupies.
 
 Optionally:
-   - Enable [**Multiple metrics**](#multiple-metrics) in the layer settings to define each category as a separate metric.
+   - Enable [**Multiple metrics**](#percentage-completion) in the layer settings to define each category as a separate metric.
 
 The chart preview updates to show a grid of colored squares. Each color represents a category, and the number of squares reflects its proportion of the total.
 :::::
@@ -57,9 +57,6 @@ Tweak the appearance of the chart to your needs. Consider the following best pra
 **Use intuitive colors**
 :   Assign colors that have semantic meaning when possible (for example, green for success, red for errors). Use the [color mapping feature](../lens.md#assign-colors-to-terms) for consistent coloring.
 
-**Consider the grid size**
-:   A 10x10 grid (100 squares) works well for percentages. Each square naturally represents 1%.
-
 **Order categories meaningfully**
 :   Arrange categories from largest to smallest or in a natural order (such as satisfaction ratings from low to high).
 
@@ -68,7 +65,7 @@ Refer to [Waffle chart settings](#waffle-chart-settings) to find all configurati
 
 :::::{step} Save the chart
 - If you accessed Lens from a dashboard, select **Save and return** to save the visualization and add it to that dashboard, or select **Save to library** to add the visualization to the Visualize library and reuse it later.
-- If you accessed Lens from the Visualize library, select **Save**. A menu opens and offers you to add the visualization to a dashboard and to the Visualize library.
+- If you accessed Lens from the Visualize library, select **Save**. A menu opens and lets you add the visualization to a dashboard and to the Visualize library.
 :::::
 
 ::::::
@@ -77,21 +74,23 @@ Refer to [Waffle chart settings](#waffle-chart-settings) to find all configurati
 
 ### Show percentage completion with multiple metrics [percentage-completion]
 
-You can use [multiple metrics](#multiple-metrics) to show progress toward a goal as a percentage, with filled squares for completed work and empty squares for remaining work.
+You can use **Multiple metrics** to show progress toward a goal, with filled squares for completed work and empty squares for remaining work.
 
-1. Create a **Waffle** chart and remove any existing **Group by** dimension.
+#### Example: Revenue progress toward a sales target
+
+This example uses the **Kibana Sample Data eCommerce** data set. If you haven't installed it yet, refer to [Sample data](/manage-data/ingest/sample-data.md) for instructions.
+
+1. Create a **Waffle** chart using the **Kibana Sample Data eCommerce** {{data-source}}.
 2. Open **Layer settings**:
    * {applies_to}`serverless: ga` {applies_to}`stack: ga 9.3` Select {icon}`app_management` **Layer settings**.
    * {applies_to}`stack: ga 9.0-9.2` Select {icon}`boxes_horizontal`, then select **Layer settings**.
-3. Select **Multiple metrics**, then close the settings.
+3. Select **Multiple metrics**, then close the layer settings.
 4. Add two metrics:
-   - **Completed**: A formula or aggregation representing completed items
-   - **Remaining**: A formula representing remaining items (for example, `goal - completed`)
-5. Assign distinct colors (for example, green for completed, gray for remaining).
+   - **Revenue earned**: Set to `Sum` of `taxful_total_price`. Name it "Revenue earned" and assign a green color.
+   - **Remaining to goal**: Set to a [formula](/explore-analyze/visualize/lens.md#lens-formulas): `500000 - sum(taxful_total_price)`. Name it "Remaining to goal" and assign a gray color.
+5. The chart shows how close revenue is to the $500,000 target. Each green square represents 1% of the goal achieved.
 
-<!-- TODO: Add screenshot
-![Waffle chart showing percentage completion with two metrics](/explore-analyze/images/waffle-scenario-completion.png "=70%")
--->
+![Waffle chart showing revenue progress toward a sales target](/explore-analyze/images/waffle-scenario-completion.png "=70%")
 
 ## Waffle chart settings [waffle-chart-settings]
 
@@ -139,16 +138,6 @@ The **Metric** dimension defines the value for each category, determining how ma
     - **Value format**: Control how numeric values are displayed (number, percent, bytes, and more).
     - **Series color**: When using multiple metrics without a **Group by** dimension, assign a specific color to each metric.
 
-### Multiple metrics [multiple-metrics]
-
-Enable **Multiple metrics** in the layer settings to define each waffle section as a separate metric rather than using a categorical field.
-
-1. Open **Layer settings**:
-   * {applies_to}`serverless: ga` {applies_to}`stack: ga 9.3` Select {icon}`app_management` **Layer settings**.
-   * {applies_to}`stack: ga 9.0-9.2` Select {icon}`boxes_horizontal`, then select **Layer settings**.
-2. Select **Multiple metrics**, then close the settings.
-3. Add multiple **Metric** dimensions, each representing a section of the waffle.
-
 ### General layout [appearance-options]
 
 When creating or editing a visualization, you can customize the legend from the ![Legend icon](/explore-analyze/images/kibana-legend-icon.svg "") **Legend** menu.
@@ -165,55 +154,37 @@ Waffle charts do not have configurable style settings. The chart automatically d
     - **Show**: Always show the legend (default).
     - **Hide**: Never show the legend.
 
-**Position**
-:   Set the legend position: **Right** (default), **Left**, **Top**, or **Bottom**.
+**Width**
+:   Control the width of the legend panel: **Small**, **Medium** (default), **Large**, or **Extra large**.
 
-**Statistics**
-:   Show the **Value** statistic in the legend to display the numeric value alongside each legend entry. This is enabled by default.
+**Show value**
+:   Toggle whether to display the numeric value alongside each legend entry. This is enabled by default.
 
-**Truncate**
-:   Toggle whether to truncate long legend labels, and set a maximum number of lines (default: 1).
-
-**Legend size**
-:   Control the size of the legend panel: **Auto** (default), **Small**, **Medium**, **Large**, or **Extra large**.
+**Label truncation**
+:   Toggle whether to truncate long legend labels. When enabled, set the **Line limit** to control how many lines to display before truncating (1-5, default: 1).
 
 ## Waffle chart examples
 
 The following examples show various configuration options for building impactful waffle charts.
 
-**Browser market share**
-:   Visualize the distribution of browsers used by your website visitors:
+**Response status breakdown**
+:   Visualize the proportion of successful vs. failed HTTP requests at a glance:
+
+    * Example based on: {{kib}} Sample Data Logs
+    * **Group by**: Filters
+      - "Success (2xx/3xx)": `response.keyword >= "200" AND response.keyword < "400"`
+      - "Client errors (4xx)": `response.keyword >= "400" AND response.keyword < "500"`
+      - "Server errors (5xx)": `response.keyword >= "500"`
+    * **Metric**: Count
+    * **Color mapping**: Green for success, yellow for client errors, red for server errors
+
+![Waffle chart showing response status breakdown](/explore-analyze/images/waffle-example-response-status.png "=70%")
+
+**OS distribution**
+:   Show the distribution of operating systems used by your website visitors:
 
     * Example based on: {{kib}} Sample Data Logs
     * **Group by**: `machine.os.keyword` (Top 5 values)
     * **Metric**: Count
-    * **Color mapping**: Distinct colors for each browser
 
-<!-- TODO: Add screenshot
-![Waffle chart showing browser market share](/explore-analyze/images/waffle-example-browser.png "=70%")
--->
-
-**Order status distribution**
-:   Show how orders are distributed across status categories:
-
-    * Example based on: {{kib}} Sample Data eCommerce
-    * **Group by**: `customer_gender` (Top values)
-    * **Metric**: Count
-    * **Legend**: Show with values
-
-<!-- TODO: Add screenshot
-![Waffle chart showing order status distribution](/explore-analyze/images/waffle-example-orders.png "=70%")
--->
-
-**Project completion progress**
-:   Display progress toward a project milestone:
-
-    * Configuration: [**Multiple metrics**](#multiple-metrics)
-    * **Metrics**:
-      - Tasks completed: `Count(kql='status: completed')`
-      - Tasks remaining: `Count(kql='status: pending OR status: in_progress')`
-    * **Colors**: Green for completed, gray for remaining
-
-<!-- TODO: Add screenshot
-![Waffle chart showing project completion progress](/explore-analyze/images/waffle-example-progress.png "=70%")
--->
+![Waffle chart showing OS distribution](/explore-analyze/images/waffle-example-os.png "=70%")
