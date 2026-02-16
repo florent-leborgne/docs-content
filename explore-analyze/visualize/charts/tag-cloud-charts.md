@@ -12,9 +12,7 @@ Tag cloud charts display text labels (tags) where each tag's size represents its
 
 You can create tag cloud charts in {{kib}} using [**Lens**](../lens.md).
 
-<!-- TODO: Add screenshot
 ![Example Lens tag cloud chart showing popular search terms](/explore-analyze/images/tag-cloud-chart-example.png)
--->
 
 ## Build a tag cloud chart
 
@@ -49,7 +47,7 @@ The chart preview updates to show text labels sized by metric value, with more p
 Tweak the appearance of the chart to your needs. Consider the following best practices:
 
 **Limit the number of tags**
-:   Keep your tag cloud to 20-50 tags maximum. Too many tags create visual clutter and make the most important terms hard to identify.
+:   Keep your tag cloud to 20-50 tags maximum. Too many tags create visual clutter and make the most important terms hard to identify. If the panel is too small to fit all tags, a warning indicates that some values could not be displayed.
 
 **Use meaningful metrics**
 :   Choose a metric that represents importance or frequency. Count is common, but Sum, Average, or custom formulas can provide different insights.
@@ -65,7 +63,7 @@ Refer to [Tag cloud chart settings](#tag-cloud-chart-settings) to find all confi
 
 :::::{step} Save the chart
 - If you accessed Lens from a dashboard, select **Save and return** to save the visualization and add it to that dashboard, or select **Save to library** to add the visualization to the Visualize library and reuse it later.
-- If you accessed Lens from the Visualize library, select **Save**. A menu opens and offers you to add the visualization to a dashboard and to the Visualize library.
+- If you accessed Lens from the Visualize library, select **Save**. A menu opens and lets you add the visualization to a dashboard and to the Visualize library.
 :::::
 
 ::::::
@@ -88,9 +86,18 @@ The **Tags** dimension defines the text labels that appear in the cloud.
       :::
       :::{include} ../../_snippets/lens-breakdown-advanced-settings.md
       :::
+    - **Date histogram**: Group data into time-based buckets.
+      - **Field**: Select the date field to use for the time-based grouping.
+      :::{include} ../../_snippets/lens-histogram-settings.md
+      :::
+    - **Intervals**: Create numeric ranges for continuous data.
+      - **Field**: Select the numeric field to create intervals from.
+      - **Include empty rows**: Include intervals with no matching documents.
+    - **Filters**: Define custom KQL filters to create specific tags.
 
 **Appearance**
 :   - **Name**: Customize the label shown in the visualization title.
+    - **Value format**: Control how tag labels are displayed (number, percent, bytes, and more).
     - **Color mapping**: Select a color palette or assign specific colors to tags. Refer to [Assign colors to terms](../lens.md#assign-colors-to-terms) for details.
 
 ### Metric settings [metric-settings]
@@ -139,30 +146,15 @@ The following examples show various configuration options for building impactful
     * **Metric**: Count
     * **Orientation**: Single (horizontal)
 
-<!-- TODO: Add screenshot
 ![Tag cloud showing popular request URLs](/explore-analyze/images/tag-cloud-example-urls.png "=70%")
--->
 
-**Top product categories**
-:   Show which product categories are most popular:
+**Most popular flight destinations**
+:   Show which cities receive the most flights, with larger tags indicating higher traffic:
 
-    * Example based on: {{kib}} Sample Data eCommerce
-    * **Tags**: `category.keyword` (Top 20 values)
+    * Example based on: {{kib}} Sample Data Flights
+    * **Tags**: `DestCityName` (Top 30 values)
     * **Metric**: Count
-    * **Color mapping**: Distinct colors per category
+    * **Orientation**: Multiple
+    * **Color**: Gradient
 
-<!-- TODO: Add screenshot
-![Tag cloud showing top product categories](/explore-analyze/images/tag-cloud-example-categories.png "=70%")
--->
-
-**Frequent log sources**
-:   Identify which systems generate the most log entries:
-
-    * Example based on: System logs
-    * **Tags**: `host.name` or `service.name` (Top 25 values)
-    * **Metric**: Count
-    * **Orientation**: Right angled for visual variety
-
-<!-- TODO: Add screenshot
-![Tag cloud showing frequent log sources](/explore-analyze/images/tag-cloud-example-log-sources.png "=70%")
--->
+![Tag cloud showing most popular flight destinations](/explore-analyze/images/tag-cloud-example-destinations.png "=70%")
