@@ -45,7 +45,7 @@ After each dispatcher run, {{kib}} records one of three outcomes for each action
 | `throttled` | The alert matched an action policy but was rate-limited by the frequency setting, so no workflow ran. This is expected behavior, not an error. |
 | `unmatched` | No action policy matched the alert. No workflow ran. |
 
-`unmatched` is recorded in the event log but isn't available as an outcome filter in the execution history. To find those records, open Discover and query `.kibana-event-log-*` with `event.provider: "alerting_v2"` and `event.action: "unmatched"`.
+`unmatched` is recorded in the event log but isn't available as an outcome filter in the execution history. To find those records, open Discover. In {{esql}} mode, run `FROM .kibana-event-log-* | WHERE event.provider == "alerting_v2" AND event.action == "unmatched"`. In classic mode, query `.kibana-event-log-*` with `event.provider: "alerting_v2"` and `event.action: "unmatched"`.
 
 :::{note}
 Alerts that are acknowledged, snoozed, resolved, or covered by a [maintenance window](../../alerts/maintenance-windows.md) fail the eligibility check, so the dispatcher doesn't evaluate action policies for them. They don't appear in the execution history.
